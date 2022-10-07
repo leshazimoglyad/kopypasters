@@ -1,0 +1,14 @@
+.navigation {
+  &__list {
+    display: flex;
+    gap: 40px;
+    @include fonts(12px, 14px, 500, inherit);
+    text-transform: uppercase;
+  }
+
+  &__item--active::after {
+    content: "";
+    display: block;
+    border-bottom: 3px solid #FF001B;
+  }
+}
