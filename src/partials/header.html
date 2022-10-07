@@ -1,3 +1,45 @@
-<header class="header">
-  <h1>Начнём</h1>
+<header class="header-page">
+  
+  <!-- Container -->
+  <div class="container header-page__container">
+
+    <!-- Top wrapper -->
+    <div class="header-page__top-wrapper">
+
+      <!-- Logo -->
+      <div class="logo">
+        <svg class="logo__icon" width="24" height="24">
+          <use href="./images/icons.svg#icon-logo"></use>
+        </svg>
+        <p class="logo__text">Filmoteka</p>
+      </div>
+
+      <!-- Navigation -->
+      <nav class="navigation">
+        <ul class="navigation__list">
+          <li class="navigation__item navigation__item--active">
+            <a href="index.html">home</a>
+          </li>
+          <li class="navigation__item">
+            <a href="library.html">my library</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+
+    <!-- Search -->
+    <div class="search">
+      <div class="search__wrapper">
+        <input class="search__input" placeholder="Movie search" />
+        <svg class="search__icon" width="12" height="12">
+          <use href="./images/icons.svg#icon-search"></use>
+        </svg>
+      </div>
+
+      <!-- Warning message -->
+      <p class="search__warning-message is-hidden">
+        Search result not successful. Enter the correct movie name.
+      </p>
+    </div>
+  </div>
 </header>

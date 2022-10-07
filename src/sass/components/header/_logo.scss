@@ -1,0 +1,19 @@
+.logo {
+  display: flex;
+  // ТРЕБА ПОФІКСИТИ ВЕРТИАЛЬНЕ ВИРІВНЮВАННЯ
+  // align-items: baseline;
+  align-items: center;
+  @include fonts(30px, 35px, 500, inherit);
+
+  &__text {
+    display: none;    
+    padding-left: 10px;
+  }
+
+  // TABLET
+  @include mq('tablet') {
+    &__text {
+      display: inline-block;
+    }
+  }
+}

@@ -1,6 +1,12 @@
-@import './utils/normalize';
-@import './utils/is-hidden';
-@import './utils/variables';
-@import './utils/reset';
+// Utils
+@import './utils';
 
-@import './components/header';
+// Base
+@import './base';
+
+// Components
+@import './components';
+
+// Layouts
+@import './layouts';
+
