@@ -371,8 +371,10 @@ body {
 .footer-container {
   justify-content: center;
   display: flex;
+  flex-wrap: wrap;
   padding-top: 28.71px;
   padding-bottom: 29.7px;
+  margin: 0 auto;
 }
 @media screen and (max-width: 767px) {
   .footer-container {
@@ -381,6 +383,7 @@ body {
 }
 @media screen and (min-width: 768px) {
   .footer-container {
+    flex-wrap: nowrap;
     width: 768px;
     padding-top: 30px;
     padding-bottom: 30px;
@@ -401,4 +404,6 @@ body {
 .heart-icon {
   width: 14px;
   height: 12.88px;
+  margin-left: 10px;
+  margin-right: 10px;
 }/*# sourceMappingURL=index.css.map */
