@@ -5,7 +5,6 @@ import blankImage from "../../images/no-image.svg"
 
 // Get genres by IDs
 function getGenresByID({ genres: genresList }, ids) {
-
         const res = [];
 
         genresList.forEach((genre) => {
@@ -28,7 +27,7 @@ export function createMovieCard(movie, genreList) {
                 genre_ids,
                 release_date,
                 // rate,
-                // votes,
+                vote_average,
                 // popularity,
                 // about,
         } = movie;
@@ -51,6 +50,9 @@ export function createMovieCard(movie, genreList) {
         
         // Release date           
         const date = release_date ? release_date.slice(0, 4) : false;
+
+        //If page is library.html we need add to movieCard vote_average
+        const isLibrary = window.location.pathname === "/library.html" ? true : false;
 
         const movieCard = `
 
