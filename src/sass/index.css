@@ -402,6 +402,8 @@ body {
 }
 
 .heart-icon {
+  margin-left: 10px;
+  margin-right: 10px;
   width: 14px;
   height: 12.88px;
   margin-left: 10px;

@@ -10,10 +10,17 @@
     width: 320px;
 }
 @media screen and (min-width: 768px) {
+<<<<<<< Updated upstream
     flex-wrap: nowrap;
     width: 768px;
     padding-top:30px;
    padding-bottom: 30px;}
+=======
+flex-wrap: nowrap;
+width:768px;
+padding-top:30px;
+padding-bottom:30px;}
+>>>>>>> Stashed changes
 @media screen and (min-width: 1200px) {
     padding-top:28.71px;
    padding-bottom: 29.7px;
@@ -24,9 +31,17 @@
 background: #F7F7F7;
 
 }
+<<<<<<< Updated upstream
 .heart-icon{width: 14px;
     height: 12.88px;
     margin-left: 10px;
     margin-right: 10px;
 
+=======
+.heart-icon{
+    margin-left: 10px;
+    margin-right: 10px;
+width: 14px;
+height: 12.88px;
+>>>>>>> Stashed changes
 }
