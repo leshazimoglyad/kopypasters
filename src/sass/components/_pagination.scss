@@ -1,0 +1,44 @@
+.pagination {
+    margin: 0;
+    padding-bottom: 60px;
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    color: #000;
+
+    & > li {
+        cursor: pointer;
+        border: 1px solid #eee;
+        border-radius: 3px;
+        margin-right: 2px;
+        padding: 4px 7px;
+        line-height: 1;
+    }
+
+    & > li:hover {
+        background-color: #ff6b01;
+        color: #fff;
+    }
+
+    & > li.disabled {
+        cursor: not-allowed;
+    }
+
+    // TABLET
+    @include mq("tablet") {
+        & > li {
+            padding: 6px 12px;
+            margin-right: 5px;
+        }
+    }
+
+    // DESKTOP
+    @include mq("desktop") {
+    }
+
+    .active {
+        color: #fff;
+        background-color: #ff6b01;
+    }
+}

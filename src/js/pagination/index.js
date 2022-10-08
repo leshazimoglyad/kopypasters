@@ -1,4 +1,3 @@
-import './styles.css'
 import { createLists, replaceElement, scrollToTop, noop } from './util'
 
 /**
