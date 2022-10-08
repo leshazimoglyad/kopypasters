@@ -1,4 +1,4 @@
-import { loadToStorage } from "./services/storage.js";
+import { loadFromStorage } from "./services/storage.js";
 import { createMovieCard } from "./style/movieCard";
 
 // Clear gallery
@@ -15,7 +15,7 @@ function renderMoviesList(dataJSON) {
         // All data from server
         const { results: moviesList } = dataJSON;
 
-        const genreList = loadToStorage("genres");
+        const genreList = loadFromStorage("genres");
 
         // Remap json to HTML elements
         const moviesCards = moviesList

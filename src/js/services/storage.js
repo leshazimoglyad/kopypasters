@@ -7,7 +7,7 @@ const saveToStorage = (key, value) => {
     }
 };
 
-const loadToStorage = (key) => {
+const loadFromStorage = (key) => {
     try {        
         const serializedState = localStorage.getItem(key);
         return serializedState === null ? undefined : JSON.parse(serializedState);
@@ -26,6 +26,6 @@ const removeFromStorage = (key) => {
 
 export {
     saveToStorage,
-    loadToStorage,
+    loadFromStorage,
     removeFromStorage,
 };
