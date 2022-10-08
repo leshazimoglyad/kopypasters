@@ -1,11 +1,10 @@
 const PREFIX_POSTER_URL = "https://image.tmdb.org/t/p/w500/";
 
 // Blank image
-import blankImage from "../../images/no-image.png"
+import blankImage from "../../images/no-image.png";
 
 // Get genres by IDs
 function getGenresByID({ genres: genresList }, ids) {
-
         const res = [];
 
         genresList.forEach((genre) => {
@@ -28,7 +27,7 @@ export function createMovieCard(movie, genreList) {
                 genre_ids,
                 release_date,
                 // rate,
-                // votes,
+                vote_average,
                 // popularity,
                 // about,
         } = movie;
@@ -38,23 +37,43 @@ export function createMovieCard(movie, genreList) {
 
         // Preparing url, check posterImage on NULL
         let posterImage = PREFIX_POSTER_URL;
-        poster_path ? posterImage += `${poster_path}` : posterImage = `${blankImage}`;
-        
-        // Release date           
-        const date = release_date ? release_date.slice(0, 4) : 'No date';
+        poster_path ? (posterImage += `${poster_path}`) : (posterImage = `${blankImage}`);
+
+        // Release date
+        const date = release_date ? release_date.slice(0, 4) : "No date";
+
+        //If page is library.html we need add to movieCard vote_average
+        const isLibrary = window.location.pathname === "/library.html" ? true : false;
 
         const movieCard = `
 
                 <div class="movies-section__card">
                                                 
-                        <img class="movies-section__image" src="${posterImage}" alt="${title || "No title"}" loading="lazy" />                        
+                        <img class="movies-section__image" src="${posterImage}" alt="${
+                title || "No title"
+        }" loading="lazy" />                        
                         
                         <ul class="movies-section__info">
                                 <li class="movies-section__item movies-section__title">
                                         <p>${title || "No title"}</p>
                                 </li>
                                 <li class="movies-section__item movies-section__genres">
-                                        <p>${genres || "No genres"} | ${date}</p>
+                                        <p>${genres || "No genres"} | ${date}
+                                        </p>
+                                        ${
+                                                isLibrary
+                                                        ? `
+                                                <span class="movies-section__voteAverage">${
+                                                        vote_average || "No vote average"
+                                                }${
+                                                                  (vote_average ^ 0) ===
+                                                                  vote_average
+                                                                          ? ".0"
+                                                                          : ""
+                                                          }</span>
+                                        `
+                                                        : ``
+                                        }
                                 </li>
                         </ul>
                 </div>
