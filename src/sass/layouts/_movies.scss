@@ -5,10 +5,8 @@
 
     &__grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-        // grid-auto-rows: minmax(100px, 0.8fr);
-        // grid-auto-rows: 400px;
-        grid-gap: 16px;
+        grid-template-columns: repeat(auto-fit, minmax(280px, max-content));
+        gap: 16px;
         justify-content: center;
         margin-left: auto;
         margin-right: auto;
@@ -18,7 +16,6 @@
     }
 
     &__card {
-        // height: 400px;
     }
 
     &__image {
@@ -27,17 +24,44 @@
         height: 455px;
     }
 
+    // Blank image
+    &__image--blank {
+        object-fit: contain;
+    }
+
     &__info {
         padding-top: 10px;
         @include fonts(12px, 16px, 500, inherit);
     }
 
-    &__title {
-        text-transform: uppercase;
+    &__item:first-child {
+        padding-bottom: 6px;
     }
 
-    &__genres {
+    &__title {
+        text-transform: uppercase;        
+
+        &--no-info {
+            background-color: #000;
+            color: #fff;
+            border-radius: 7px;
+            padding: 1px 5px;
+        }
+    }
+
+    &__add-info {
         color: #ff6b08;
+    }
+
+    // No info
+    &__year,
+    &__genres{
+        &--no-info {
+            background-color: #ff6b08;
+            color: #fff;
+            border-radius: 7px;
+            padding: 1px 5px;
+        }
     }
 
     // TABLET
@@ -51,13 +75,10 @@
         }
 
         &__image {
-            border-radius: 5px;
-            object-fit: cover;
             height: 574px;
         }
 
         &__info {
-            // @include fonts(20px, 24px, 500, inherit);
         }
     }
 
