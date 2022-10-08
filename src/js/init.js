@@ -32,17 +32,37 @@ document.addEventListener("DOMContentLoaded", function () {
         getMovieByName_deb({ pagination: true });
 });
 
+function warningMessage(bool) {
+        const warnMessageElem = document.querySelector(".search__warning-message");
+        bool
+                ? warnMessageElem.classList.remove("is-hidden")
+                : warnMessageElem.classList.add("is-hidden");
+}
+
+function loadingSpinnerToggle() {
+        const spinnerElem = document.querySelector(".movies-section__loading-spinner");
+        spinnerElem.classList.toggle("visually-hidden");
+}
+
 // Post http req and trying to get pictures
 async function getMovieByName(param) {
         try {
+
+                // Hide warning message
+                warningMessage(false);
+
+                // Show loading spinner with 200 ms delay
+                setTimeout(loadingSpinnerToggle, 200);
+
                 // Send http req, trying get the pictures
                 const response = await fetchMovie(param);
 
-                if (response.status != 200) {
+                // Check statuses
+                if (response.status !== 200) {
                         throw new Error(response.status);
                 }
 
-                if (response.data == undefined) {
+                if (response.data === undefined) {
                         throw new Error("Incorrect data");
                 }
 
@@ -52,12 +72,14 @@ async function getMovieByName(param) {
                 // Get total pages and cur page
                 const { total_pages } = dataJSON;
 
-                // If nothing founded throw Message and return
-                // if (totalHits == 0) {
-                //         throw new Error(
-                //                 `Sorry, there are no images matching your search "${name}" query. Please try again.`,
-                //         );
-                // }
+                // Hide loading spinner
+                loadingSpinnerToggle();
+
+                // Return if founded nothing and show warning
+                if (total_pages == 0) {
+                        warningMessage(true);
+                        return;
+                }                
 
                 // Initialization rendering gallery
                 initRender(dataJSON);
@@ -80,11 +102,11 @@ async function getGenres() {
                 // Send http req, trying get the pictures
                 const response = await fetchGenres();
 
-                if (response.status != 200) {
+                if (response.status !== 200) {
                         throw new Error(response.status);
                 }
 
-                if (response.data == undefined) {
+                if (response.data === undefined) {
                         throw new Error("Incorrect data");
                 }
 
