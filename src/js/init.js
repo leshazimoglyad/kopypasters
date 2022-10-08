@@ -52,7 +52,7 @@ async function getMovieByName(param) {
                 warningMessage(false);
 
                 // Show loading spinner with 200 ms delay
-                setTimeout(loadingSpinnerToggle, 200);
+                setTimeout(loadingSpinnerToggle, 500);
 
                 // Send http req, trying get the pictures
                 const response = await fetchMovie(param);
