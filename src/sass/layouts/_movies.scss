@@ -6,7 +6,7 @@
     &__grid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(280px, max-content));
-        gap: 16px;
+        grid-gap: 16px;
         justify-content: center;
         margin-left: auto;
         margin-right: auto;
@@ -55,6 +55,7 @@
 
     // No info
     &__year,
+    
     &__genres{
         &--no-info {
             background-color: #ff6b08;
@@ -62,6 +63,20 @@
             border-radius: 7px;
             padding: 1px 5px;
         }
+    }
+    
+    &__voteAverage {
+        display: inline-block;
+        margin: 0px 0px 0px 8px;
+        padding: 1px;
+        text-align: center;
+        width: 36px;
+        height: 16px;
+        @include fonts(12px, 14px, 500, inherit);
+        text-transform: uppercase;
+        color: #ffffff;
+        background-color: #ff6b01;
+        border-radius: 4px;
     }
 
     // TABLET

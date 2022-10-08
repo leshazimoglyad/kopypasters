@@ -66,6 +66,21 @@ export function createMovieCard(movie, genreList) {
                                         <span class="movies-section__${genres ? 'genres' : "genres--no-info"}">${genres || "No genres"}</span>
                                         <span>|</span>
                                         <span class="movies-section__${date ? 'year' : "year--no-info"}">${date || "No date"}</span>
+
+                                        ${
+                                                isLibrary
+                                                        ? `
+                                                <span class="movies-section__voteAverage">${
+                                                        vote_average || "No vote average"
+                                                }${
+                                                                  (vote_average ^ 0) ===
+                                                                  vote_average
+                                                                          ? ".0"
+                                                                          : ""
+                                                          }</span>
+                                        `
+                                                        : ``
+                                        }
                                 </li>
                         </ul>
                 </div>
