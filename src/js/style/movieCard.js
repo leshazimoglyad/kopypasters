@@ -1,7 +1,7 @@
 const PREFIX_POSTER_URL = "https://image.tmdb.org/t/p/w500/";
 
 // Blank image
-import blankImage from "../../images/no-image.png";
+import blankImage from "../../images/no-image.svg"
 
 // Get genres by IDs
 function getGenresByID({ genres: genresList }, ids) {
@@ -37,10 +37,20 @@ export function createMovieCard(movie, genreList) {
 
         // Preparing url, check posterImage on NULL
         let posterImage = PREFIX_POSTER_URL;
-        poster_path ? (posterImage += `${poster_path}`) : (posterImage = `${blankImage}`);
 
-        // Release date
-        const date = release_date ? release_date.slice(0, 4) : "No date";
+        // SCSS modifacator for blank image
+        let imgBlank = '';
+
+        if (poster_path) { 
+                posterImage += `${poster_path}`
+        } else {
+                posterImage = `${blankImage}`
+                imgBlank = 'movies-section__image--blank';
+        };
+        
+        // Release date           
+        const date = release_date ? release_date.slice(0, 4) : false;
+
 
         //If page is library.html we need add to movieCard vote_average
         const isLibrary = window.location.pathname === "/library.html" ? true : false;
@@ -49,17 +59,18 @@ export function createMovieCard(movie, genreList) {
 
                 <div class="movies-section__card">
                                                 
-                        <img class="movies-section__image" src="${posterImage}" alt="${
-                title || "No title"
-        }" loading="lazy" />                        
+                        <img class="movies-section__image ${imgBlank}" src="${posterImage}" alt="${title || "No title"}" loading="lazy" />                        
+
                         
                         <ul class="movies-section__info">
-                                <li class="movies-section__item movies-section__title">
-                                        <p>${title || "No title"}</p>
+                                <li class="movies-section__item">
+                                        <span class="movies-section__${title ? 'title' : "title--no-info"}">${title || "No title"}</span>
                                 </li>
-                                <li class="movies-section__item movies-section__genres">
-                                        <p>${genres || "No genres"} | ${date}
-                                        </p>
+                                <li class="movies-section__item movies-section__add-info">
+                                        <span class="movies-section__${genres ? 'genres' : "genres--no-info"}">${genres || "No genres"}</span>
+                                        <span>|</span>
+                                        <span class="movies-section__${date ? 'year' : "year--no-info"}">${date || "No date"}</span>
+
                                         ${
                                                 isLibrary
                                                         ? `
