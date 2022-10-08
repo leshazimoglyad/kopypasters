@@ -8,4 +8,6 @@ import "./js/pagination";
 import "./js/init";
 
 // Movies gallery
-import "./js/movies"
+import "./js/movies";
+// modal-film
+import "./js/modal/modal-film";
