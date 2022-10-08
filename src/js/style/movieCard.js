@@ -56,6 +56,7 @@ export function createMovieCard(movie, genreList) {
         // Release date           
         const date = release_date ? release_date.slice(0, 4) : false;
 
+
         //If page is library.html we need add to movieCard vote_average
         const isLibrary = window.location.pathname === "/library.html" ? true : false;
         
@@ -64,7 +65,6 @@ export function createMovieCard(movie, genreList) {
                 <div class="movies-section__card" data-id=${id || 0}>
                                                 
                         <img class="movies-section__image ${imgBlank}" src="${posterImage}" alt="${filmTitle || "No title"}" loading="lazy" />                        
-
                         
                         <ul class="movies-section__info">
                                 <li class="movies-section__item">
