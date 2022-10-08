@@ -1,16 +1,16 @@
 .active {
-  color: #333;
-  background-color: #eee;
+  color: #fff;
+  background-color: #ff6b01;
 }
 
 .pagination {
   margin: 0;
-  padding: 0;
+  padding-bottom: 60px;
   list-style: none;
   display: flex;
   justify-content: center;
   flex-direction: row;
-  color: #999;
+  color: #000;
 }
 
 .pagination > li {
@@ -20,6 +20,11 @@
   cursor: pointer;
   border: 1px solid #eee;
   border-radius: 3px;
+}
+
+.pagination > li:hover {
+  background-color: #ff6b01;
+  color: #fff;
 }
 
 .pagination > li.disabled {

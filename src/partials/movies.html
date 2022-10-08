@@ -1,12 +1,21 @@
 <section class="movies-section">
-    <h2 class="movies-section__title visually-hidden">Movies list</h2>
-    <div class="container movies-section__container">
 
-        <!-- ТРЕБА ДОДАТИ ЗАГЛУШКУ, spinner -->
-        <!-- <div class="movies movies--empty-page"></div> -->
+    <!-- Title(hidden) -->
+    <h2 class="movies-section__title visually-hidden">Movies list</h2>
+
+    <!-- Container for movies -->
+    <div class="container movies-section__container">
+        
+        <!-- Loading spinner -->
+        <div class="movies-section__loading-spinner visually-hidden">
+            <div class="movies-section__filmstrip"></div>
+            <p class="movies-section__text">loading</p>
+        </div>
+
+        <!-- Movies grid -->
         <div class="movies-section__grid"></div>
     </div>
 
     <!-- Pagination -->
-    <div class="pagination"></div>    
+    <div class="pagination"></div>
 </section>
