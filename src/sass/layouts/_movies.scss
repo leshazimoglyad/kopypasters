@@ -39,7 +39,7 @@
     }
 
     &__title {
-        text-transform: uppercase;        
+        text-transform: uppercase;
 
         &--no-info {
             background-color: #000;
@@ -55,8 +55,7 @@
 
     // No info
     &__year,
-    
-    &__genres{
+    &__genres {
         &--no-info {
             background-color: #ff6b08;
             color: #fff;
@@ -64,7 +63,6 @@
             padding: 1px 5px;
         }
     }
-    
     &__voteAverage {
         display: inline-block;
         margin: 0px 0px 0px 8px;
@@ -103,6 +101,8 @@
             @include fonts(20px, 24px, 500, inherit);
         }
         &__voteAverage {
+            position: relative;
+            bottom: 3px;
             padding: 3px;
             width: 40px;
             height: 20px;
