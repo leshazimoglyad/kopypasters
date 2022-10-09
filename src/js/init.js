@@ -6,6 +6,8 @@ import { saveToStorage } from "./services/storage.js";
 
 export const DEBOUNCE_DELAY = 300;
 
+export let myPager;
+
 // Wait the DOM is loaded
 document.addEventListener("DOMContentLoaded", function () {
         // Refs to DOM elements
@@ -130,7 +132,7 @@ function initPagination(total_pages, param) {
         // if (total_pages > 500) total_pages = 500;
 
         // Init Pagination
-        const myPager = new Pagination(
+        myPager = new Pagination(
                 total_pages,
                 20,
                 function (page) {
