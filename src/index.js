@@ -5,6 +5,7 @@ import "./js/services/fetch";
 import "./js/pagination";
 
 // Init
+
 import "./js/init";
 
 // Movies gallery
