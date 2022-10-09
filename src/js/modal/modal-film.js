@@ -34,7 +34,7 @@ async function openModalWindow(e) {
         const voteCount = filmInfo.vote_count;
         const filmPosterValue = filmInfo.backdrop_path; 
         const filmPoster = `https://image.tmdb.org/t/p/w500${filmPosterValue}`;
-        // console.log(filmPoster);
+        console.log(filmPoster);
         console.log(filmPosterValue);
 
         let modalRender = refs.modal.insertAdjacentHTML(
