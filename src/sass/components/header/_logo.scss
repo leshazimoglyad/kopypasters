@@ -5,6 +5,10 @@
   align-items: center;
   @include fonts(30px, 35px, 500, inherit);
 
+  &__link {
+    cursor: pointer;
+  }
+
   &__text {
     display: none;    
     padding-left: 10px;

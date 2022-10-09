@@ -1,4 +1,5 @@
 const PREFIX_POSTER_URL = "https://image.tmdb.org/t/p/w500/";
+import { isHome } from "../init";
 
 // Blank image
 import blankImage from "../../images/no-image.svg"
@@ -55,10 +56,6 @@ export function createMovieCard(movie, genreList) {
         
         // Release date           
         const date = release_date ? release_date.slice(0, 4) : false;
-
-
-        //If page is library.html we need add to movieCard vote_average
-        const isLibrary = window.location.pathname === "/library.html" ? true : false;
         
         const movieCard = `
 
@@ -75,7 +72,7 @@ export function createMovieCard(movie, genreList) {
                                         <span>|</span>
                                         <span class="movies-section__${date ? 'year' : "year--no-info"}">${date || "No date"}</span>
                                         
-                                        ${isLibrary ? 
+                                        ${!isHome ? 
                                                 `
                                                         <span class="movies-section__voteAverage">                                                        
                                                                 ${vote_average || "No vote"}${(vote_average ^ 0) === vote_average ? ".0" : ""}

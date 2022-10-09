@@ -1,11 +1,34 @@
 .footer-container {
+    // justify-content: center;
+    // display: flex;
+    // flex-wrap: wrap;
+    // padding-top: 28.71px;
+    // padding-bottom: 29.7px;
+    // margin: 0 auto;
+
+    // @media screen and (max-width: 767px) {
+    //     width: 320px;
+    // }
+    // @media screen and (min-width: 768px) {
+    //     flex-wrap: nowrap;
+    //     width: 768px;
+    //     padding-top: 30px;
+    //     padding-bottom: 30px;
+    // }
+
+    // @media screen and (min-width: 1200px) {
+    //     padding-top: 28.71px;
+    //     padding-bottom: 29.7px;
+    //     width: 1200px;
+    // }
+}
+.footer-menu{ 
     justify-content: center;
     display: flex;
     flex-wrap: wrap;
     padding-top: 28.71px;
     padding-bottom: 29.7px;
     margin: 0 auto;
-
     @media screen and (max-width: 767px) {
         width: 320px;
     }
@@ -19,36 +42,42 @@
     @media screen and (min-width: 1200px) {
         padding-top: 28.71px;
         padding-bottom: 29.7px;
-        width: 1200px;
+       
     }
-}
 
+}
+.footer-menu__item{
+    display: flex;
+
+}
 .footer {
     background: #f7f7f7;
 
 }
-.heart:after{
+.footer-menu__link::after{
     content: "";
     width: 100%;
-    height: 3px;
+    height: 1px;
     display: block;
-    position: absolute;
     border-radius: 2px;
     left: 0;
     background-color: #0e1215;
     top: 44px;
+    
 }
 .heart-icon {
     width: 14px;
     height: 12.88px;
     margin-left: 5px;
     margin-right:5px;
+
 }
-.footer-text{
+.footer-menu__text{
     margin-bottom: 9.9px;}
     
-.footer-text-two{
+.footer-menu__text-two{
     margin-left: 3px;
+    margin-right: 5px;
 
 
 }

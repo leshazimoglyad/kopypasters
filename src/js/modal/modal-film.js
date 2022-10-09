@@ -13,8 +13,11 @@ const refs = {
         modal: document.querySelector(".modal"),
 };
 
-refs.openBtn.addEventListener("click", openModalWindow);
-refs.closeBtn.addEventListener("click", closeModal);
+export default function initModalFilmDetails() {
+        refs.openBtn.addEventListener("click", openModalWindow);
+        refs.closeBtn.addEventListener("click", closeModal);
+}
+
 
 async function openModalWindow(e) {
         const genreList = loadFromStorage("genres");

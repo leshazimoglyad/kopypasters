@@ -5,9 +5,12 @@ import "./js/services/fetch";
 import "./js/pagination";
 
 // Init
+
 import "./js/init";
 
 // Movies gallery
 import "./js/movies";
 // modal-film
 import "./js/modal/modal-film";
+
+import "./js/interface/theme-toggle";
