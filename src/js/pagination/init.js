@@ -1,6 +1,9 @@
 import Pagination from "../pagination/index.js";
 import { getMovieByName_deb } from "../movies";
 
+// Globar var for pagination instance
+export let myPager;
+
 // Init pagination
 export function initPagination({ total_pages = 1, per_page = 20, param }) {
     // Keyword for sending req
