@@ -1,13 +1,16 @@
 import { getMovieByName_deb, getGenres } from "./movies";
 import initModalFilmDetails from "./modal/modal-film";
 
+export let isHome;
+
 // Wait the DOM is loaded
 document.addEventListener("DOMContentLoaded", function () {
         //If page is library.html we need add to movieCard vote_average
-        const isHome = window.location.pathname === "/index.html" ? true : false;
+        isHome = document.title === "Kinoteka" ? true : false;
 
         // Init for Home page
         if (isHome) {
+                console.log('1')
                 initHomePage();
         }
 });
