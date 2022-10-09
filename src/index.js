@@ -10,7 +10,7 @@ import "./js/init";
 
 // Movies gallery
 import "./js/movies";
-// modal-film
-import "./js/modal/modal-film";
+// All modals
+import "./js/modal/index"
 
 import "./js/interface/theme-toggle";
