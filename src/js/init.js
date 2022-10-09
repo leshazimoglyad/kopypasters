@@ -1,8 +1,5 @@
 import { getMovieByName_deb, getGenres } from "./movies";
 
-// Globar var for pagination instance
-export let myPager;
-
 // Wait the DOM is loaded
 document.addEventListener("DOMContentLoaded", function () {
         // Refs to DOM elements
