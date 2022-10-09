@@ -51,8 +51,9 @@ async function getMovieByName(param) {
                 // Hide warning message
                 warningMessage(false);
 
-                // Show loading spinner with 200 ms delay
-                setTimeout(loadingSpinnerToggle, 500);
+                // Show loading spinner
+                loadingSpinnerToggle();               
+                await new Promise(resolve => setTimeout(resolve, 300));
 
                 // Send http req, trying get the pictures
                 const response = await fetchMovie(param);
