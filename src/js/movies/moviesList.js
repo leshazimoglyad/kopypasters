@@ -1,6 +1,7 @@
 import { getRndInteger } from "../helpers/index.js";
 import { loadFromStorage } from "../services/storage.js";
-import { createMovieCard } from "./movieCard";
+import { createMovieCard, arrowNext } from "./movieCard";
+import { nextPage } from "../pagination/util";
 
 // Clear gallery
 function clearGallery() {
@@ -28,7 +29,13 @@ function renderMoviesList(dataJSON) {
 
         // Append new photos to DOM
         gallery.insertAdjacentHTML("beforeend", moviesCards);
-        
+
+        //Add next card
+        gallery.insertAdjacentHTML("beforeend", arrowNext);
+
+        const nextBtn = document.querySelector(".movie__container");
+        nextBtn.addEventListener("click", nextPage);
+
         // Get all cards
         const cards = gallery.querySelectorAll(".movies-section__card");
 
