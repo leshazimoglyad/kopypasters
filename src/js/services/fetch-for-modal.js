@@ -1,14 +1,12 @@
-// import axios from "axios";
+import axios from "axios";
 
-// const URL = "https://api.themoviedb.org/3/";
-// const API_KEY = "d5db08081a23b85f2c18e58b0bb5a9b8";
+export default async function fetchById(id) {
+        const URL = "https://api.themoviedb.org/";
+        const FILTER = `3/movie/${id}`;
+        const API_KEY = "d5db08081a23b85f2c18e58b0bb5a9b8";
 
-// export default class ImagesApiService {
-//         constructor() {}
+        return await axios.get(`${URL}${FILTER}?${API_KEY}`);
+        
+}
 
-//         async fetchCards() {
-//                 const { data } = await axios.get(``);
-//                 // console.log(data);
-//                 return data;
-//         }
-// }
+

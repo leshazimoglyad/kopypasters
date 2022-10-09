@@ -5,7 +5,7 @@ import { isHome } from "../init";
 import blankImage from "../../images/no-image.svg"
 
 // Get genres by IDs
-function getGenresByID({ genres: genresList }, ids) {
+export function getGenresByID({ genres: genresList }, ids) {
         const res = [];
 
         genresList.forEach((genre) => {
