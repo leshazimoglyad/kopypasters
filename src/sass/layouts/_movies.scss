@@ -19,6 +19,7 @@ $color-secondary: #f5f1ed;
     }
 
     &__card {
+        cursor: pointer;
     }
 
     &__image {
@@ -88,13 +89,14 @@ $color-secondary: #f5f1ed;
         align-items: center;
         justify-content: center;
         // height: calc(100vh - 350px);
-        padding-bottom: 60px;
+        padding-bottom: 60px;        
     }
     &__text {
-        margin: 5px auto;
+        margin: 8px auto;
         color: $color-primary;
         text-transform: uppercase;
         letter-spacing: 1px;
+        font-weight: 600;
         // font-family: $font;
     }
     &__filmstrip {
@@ -103,6 +105,7 @@ $color-secondary: #f5f1ed;
         width: 56px;
         height: 70px;
         background: $color-primary;
+        box-shadow: rgb(0 0 0 / 24%) 0px 3px 8px;
         z-index: -1;
         &:before,
         &:after {
