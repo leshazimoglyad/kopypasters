@@ -7,7 +7,7 @@ export let myPager;
 document.addEventListener("DOMContentLoaded", function () {
         // Refs to DOM elements
         const searchElem = document.querySelector(".search__input");
-        // const goBtnElem = document.querySelector(".search__go-btn");
+        const searchBtnElem = document.querySelector(".search__icon");
 
         // On Enter click
         searchElem.addEventListener("keydown", (e) => {
@@ -21,9 +21,12 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 
         // On button click
-        // goBtnElem.addEventListener("click", () => {
-        //         getMovieByName_deb(searchElem.value, 1);
-        // });
+        searchBtnElem.addEventListener("click", () => {
+                getMovieByName_deb({
+                        keyword: searchElem.value,
+                        pagination: true,
+                });
+        });
 
         getGenres();
         getMovieByName_deb({ pagination: true });
