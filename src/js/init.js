@@ -89,7 +89,7 @@ async function getMovieByName(param) {
 
                 // Initialization pagination
                 const { pagination } = param;
-                if (pagination) initPagination(total_pages, param);
+                if (pagination) initPagination({total_pages, param});
         } catch (error) {
                 console.log(error);
         }
@@ -123,18 +123,18 @@ async function getGenres() {
         }
 }
 
-function initPagination(total_pages, param) {
+function initPagination({total_pages = 1, per_page = 20, param}) {
         // myPager.getCurrentPage();
         // myPager.goToPage(num);
-
+        
         const { keyword } = param;
 
-        // if (total_pages > 500) total_pages = 500;
+        if (total_pages > 10000) total_pages = 10000;
 
         // Init Pagination
         myPager = new Pagination(
                 total_pages,
-                20,
+                per_page,
                 function (page) {
                         console.log(page);
                         getMovieByName_deb({
