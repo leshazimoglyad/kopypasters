@@ -3,6 +3,7 @@ import "./js/services/fetch";
 
 // Pagination
 import "./js/pagination";
+import "./js/paginationLibrary";
 
 // Init
 
