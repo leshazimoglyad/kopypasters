@@ -1,10 +1,11 @@
-const themeToggleBtn = document.querySelector(".theme-toggle__btn");
+// ДОДАВАЙ КНОПКУ НА СТОРІНКУ БІБЛІОТЕКИ ТЕЖ, АБО РОБИ УМОВУ ЩО ЕЛЕМЕНТУ НЕМАЄ. БО ПОМИЛКА
+// const themeToggleBtn = document.querySelector(".theme-toggle__btn");
 
 if (localStorage.getItem("dark-theme")) {
         document.querySelector("body").classList.add("dark-theme");
 }
 
-themeToggleBtn.addEventListener("click", onThemeToggleBtnClick);
+// themeToggleBtn.addEventListener("click", onThemeToggleBtnClick);
 
 function onThemeToggleBtnClick() {
         document.querySelector("body").classList.toggle("dark-theme");
