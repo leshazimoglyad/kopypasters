@@ -61,3 +61,16 @@ export const fetchGenres = async () => {
 
         return axios.get(`${url}?${param.toString()}`);
 };
+
+
+export const fetchMovieById = async (id) => {
+        let url = URL;
+
+        const param = new URLSearchParams({
+                api_key: API_KEY,
+        });
+
+        const urlId = `movie/${id}`;
+        
+        return axios.get(`${url}${urlId}?${param.toString()}`);
+};

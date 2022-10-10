@@ -1,8 +1,8 @@
-<header class="header-page">
+<header class="library-header">
     <!-- Container -->
-    <div class="container header-page__container">
+    <div class="container library-header__container">
         <!-- Top wrapper -->
-        <div class="header-page__top-wrapper">
+        <div class="library-header__top-wrapper">
             <!-- Logo -->
             <a class="logo" href="index.html">
                 <svg class="logo__icon" width="24" height="24">
@@ -26,8 +26,10 @@
 
         <!-- Button list-->
         <ul class="btn-list">
-            <li class="btn-list__item"><button class="library-btn library-btn--active">Watched</button></li>
-            <li class="btn-list__item"><button class="library-btn">Queue</button></li>
+            <li class="btn-list__item">
+                <button class="library-btn library-btn--active" data-action="watched">Watched</button>
+            </li>
+            <li class="btn-list__item"><button class="library-btn" data-action="queue">Queue</button></li>
         </ul>
     </div>
 </header>

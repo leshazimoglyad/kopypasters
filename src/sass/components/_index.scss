@@ -3,8 +3,13 @@
 
 // Pagination
 @import 'pagination';
+@import 'paginationLibrary';
 
 // Header components
 @import './header/search';
 @import './header/navigation';
 @import './header/logo';
+@import './header/theme-toggle';
+
+// Modal-film
+@import "./modal-film";

@@ -1,11 +1,34 @@
 .footer-container {
+    // justify-content: center;
+    // display: flex;
+    // flex-wrap: wrap;
+    // padding-top: 28.71px;
+    // padding-bottom: 29.7px;
+    // margin: 0 auto;
+
+    // @media screen and (max-width: 767px) {
+    //     width: 320px;
+    // }
+    // @media screen and (min-width: 768px) {
+    //     flex-wrap: nowrap;
+    //     width: 768px;
+    //     padding-top: 30px;
+    //     padding-bottom: 30px;
+    // }
+
+    // @media screen and (min-width: 1200px) {
+    //     padding-top: 28.71px;
+    //     padding-bottom: 29.7px;
+    //     width: 1200px;
+    // }
+}
+.footer-menu{ 
     justify-content: center;
     display: flex;
     flex-wrap: wrap;
     padding-top: 28.71px;
     padding-bottom: 29.7px;
     margin: 0 auto;
-
     @media screen and (max-width: 767px) {
         width: 320px;
     }
@@ -19,17 +42,195 @@
     @media screen and (min-width: 1200px) {
         padding-top: 28.71px;
         padding-bottom: 29.7px;
-        width: 1200px;
+       
     }
-}
 
+}
+.footer-menu__item{
+    display: flex;
+    align-items: flex-start;
+}
 .footer {
     background: #f7f7f7;
+
 }
 
+.footer-menu__link{
+    background-color: transparent;
+    border: none;
+}
+
+.footer-menu__link::after{
+    content: "";
+    width: 100%;
+    height: 1px;
+    display: block;
+    border-radius: 2px;
+    left: 0;
+    background-color: #0e1215;
+    top: 44px;
+}
 .heart-icon {
     width: 14px;
     height: 12.88px;
-    margin-left: 10px;
-    margin-right: 10px;
+    margin-left: 5px;
+    margin-right:5px;
+
+}
+.footer-menu__text{
+    margin-bottom: 9.9px;}
+    
+.footer-menu__text-two{
+    margin-left: 3px;
+    margin-right: 5px;
+
+
+}
+
+.footer-modal{
+    padding: 93px 15px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    opacity: 1;
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.2);
+
+    &__bg{
+        background: #fff;
+        padding-bottom: 40px;
+        position: relative;
+
+        & button{
+            position: absolute;
+            top: 15px;
+            right: 5px;
+            background: transparent;
+            border: none;
+            
+
+            @include mq(tablet){
+                top: 20px;
+                right: 10px;
+            }
+
+            @include mq(desktop){
+                top: 20px;
+                right: 20px;
+            }
+        }
+    
+
+        @include mq(mobile) {
+            max-width: 453px;
+        }
+    
+        @include mq(tablet) {
+            top: 50%;
+            left: 50%;
+            margin:0 auto;
+            position: absolute;
+            width: 453px;
+            transform: translate(-50%, -50%) scale(1);
+        }
+    
+        @include mq(desktop) {
+            top: 50%;
+            left: 50%;
+            margin:0 auto;
+            position: absolute;
+            transform: translate(-50%, -50%) scale(1);
+            width: 1000px;
+        }
+    }
+
+    &__head{
+        display: flex;
+        justify-content: start;
+        align-items: center;
+        background-color: orange;
+        padding: 20px 15px;
+
+        @include mq(tablet){
+            padding: 20px 30px;
+        }
+
+        & img{
+            width: 70px;
+            margin-right: 20px;
+
+            @include mq(tablet){
+                margin-right: 50px;
+                width: 100px;
+            }
+
+            @include mq(desktop){
+                margin-right: 300px;
+            }
+        }
+
+        & span{
+            color: #fff;
+            font-size: 18px;
+
+            @include mq(tablet){
+                font-size: 22px;
+            }
+
+            @include mq(desktop){
+                font-size: 28px;
+            }
+        }
+    }
+
+    &__icon-close{
+        width: 30px;
+        height: 30px;
+    }
+
+    &__list{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        padding-left: 35px;
+        padding-top: 20px;
+
+        @include mq(tablet){
+            margin-right: 35px;
+        }
+
+        @include mq(desktop){
+            padding-left: 150px;
+        }
+
+        & li{
+            margin-bottom: 20px;
+        }
+    }
+
+    &__photo{
+        width: 100px;
+        border-radius: 50px;
+        overflow: hidden;
+    }
+
+    &__card{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        & div{
+            margin-left: 30px;
+        }
+    }
+}
+
+body.modal-open{
+    overflow: hidden;
 }

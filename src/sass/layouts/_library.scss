@@ -1,0 +1,53 @@
+.btn-list {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 60px;
+    @include mq("tablet") {
+        margin-top: 40px;
+    }
+}
+
+.btn-list__item {
+    margin-right: 20px;
+    @include mq("tablet") {
+        margin-right: 32px;
+    }
+    @include mq("desktop") {
+        margin-right: 8px;
+    }
+
+    &:last-child {
+        margin-right: 0px;
+    }
+}
+
+.library-btn {
+    display: inline-block;
+    height: 44px;
+    min-width: 130px;
+    cursor: pointer;
+
+    border-radius: 5px;
+    background-color: transparent;
+    border: 1px solid #ffffff;
+    text-align: center;
+
+    text-transform: uppercase;
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: 500;
+
+    @include mq("tablet") {
+        min-width: 152px;
+    }
+
+    @include mq("desktop") {
+        min-width: 148px;
+        height: 42px;
+    }
+    &--active {
+        background-color: #ff6b08;
+        border: transparent;
+    }
+}

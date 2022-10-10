@@ -1,0 +1,58 @@
+.movie {
+    display: none;
+}
+
+@media screen and (min-width: 1200px) {
+.movie {
+    display: block;
+    }
+
+.movie__container {
+    padding: 0;
+
+    display: block;
+
+    background-color: transparent;
+    border-width: 0;
+    cursor: pointer;
+    color: rgb(78, 133, 133);
+
+}
+
+.movie__image-container {
+    display: block;
+
+    border-radius: 5px;
+
+    background-color: #f7f7f7;
+
+    transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1),
+            transform 250ms cubic-bezier(0.4, 0, 0.2, 1),
+            opacity 250ms cubic-bezier(0.4, 0, 0.2, 1),
+            visibility 250ms cubic-bezier(0.4, 0, 0.2, 1);
+        
+    &:hover,
+    &:focus {
+        transform: scale(1.01);
+
+        color: rgb(255, 107, 8);
+    }
+}
+
+.movie__image {
+    width: 368px;
+    height: 570px;
+
+    object-fit: cover;
+    fill: currentColor;
+}
+
+.movie__data {
+    display: block;
+    margin-top: 10px;
+    font-size: 20px;
+    font-weight: 500;
+    text-transform: uppercase;
+    color: black;
+}
+}
