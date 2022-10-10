@@ -1,6 +1,12 @@
 import { createMovieCard } from "../movies/movieCard";
 import { loadFromStorage } from "../services/storage";
 
+export function initLibrary(params) {
+        // eventListeners
+        refs.addToWatchedBtn.addEventListener("click", handleAddToWatchedBtn);
+        refs.addToQueueBtn.addEventListener("click", handleAddToQueueBtn);
+}
+
 const refs = {
         addToWatchedBtn: document.querySelector('[data-action="watched"]'),
         addToQueueBtn: document.querySelector('[data-action="queue"]'),
@@ -8,10 +14,6 @@ const refs = {
 };
 
 const genreList = loadFromStorage("genres");
-
-// eventListeners
-refs.addToWatchedBtn.addEventListener("click", handleAddToWatchedBtn);
-refs.addToQueueBtn.addEventListener("click", handleAddToQueueBtn);
 
 // TEMPORARY LOCAL STORAGE
 const watchedFilms = [
