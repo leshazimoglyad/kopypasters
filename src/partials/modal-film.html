@@ -1,36 +1,64 @@
+<!-- Overlay -->
 <div class="backdrop is-hidden">
-    <div class="modal">
-        <button class="close_btn">
+    <!-- Modal -->
+    <div class="modal-detail">
+        <!-- Close button -->
+        <button class="modal-detail__close-button">
             <svg width="32" height="32"><use href="./images/icons.svg#icon-close"></use></svg>
         </button>
-        <div class="modal_poster"></div>
-        <div class="modal_info">
-            <!-- <h2 class="modal_title"></h2>
-            <table>
-                <tr>
-                    <td class="vote">Vote/Votes</td>
-                    <td class="votes-value"></td>
-                </tr>
-                <tr>
-                    <td class="popularity">Popularity</td>
-                    <td class="popularity-value"></td>
-                </tr>
-                <tr>
-                    <td class="original-title">Original title</td>
-                    <td class="original-title-value"></td>
-                </tr>
+
+        <!-- Poster image -->
+        <div class="modal-detail__poster">
+            <img
+                class="modal-detail__image"
+                src="./images/no-image.svg"
+                alt=""
+            />
+        </div>
+
+        <!-- Info -->
+        <div class="modal-detail__info">
+            <h2 class="modal-detail__title">TITLE</h2>
+
+            <!-- Table info -->
+            <table class="modal-detail__table">
+                <tbody>
+                    <tr>
+                        <td class="modal-detail__col1">Vote / Votes</td>
+                        <td class="modal-detail__col2">
+                            <span class="modal-detail__vote-avg">0</span>
+                            <span>/</span>
+                            <span class="modal-detail__vote-count">0</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="modal-detail__col1">Popularity</td>
+                        <td class="modal-detail__col2 modal-detail__popularity">0</td>
+                    </tr>
+                    <tr>
+                        <td class="modal-detail__col1">Original Title</td>
+                        <td class="modal-detail__col2 modal-detail__org-title">A FISTFUL OF LEAD</td>
+                    </tr>
+                    <tr>
+                        <td class="modal-detail__col1">Genre</td>
+                        <td class="modal-detail__col2 modal-detail__genres">...</td>
+                    </tr>
+                </tbody>
             </table>
 
-            <p class="modal_txt">About</p>
-            <p class="modal_article"></p> -->
-            <!-- <ul class="modal_list_btn list">
-                <li>
-                    <button type="button" class="modal_list_button btn_primary">Add to Watched</button>
-                </li>
-                <li>
-                    <button type="button" class="modal_list_button btn_secondary">Add to Queue</button>
-                </li>
-            </ul> -->
+            <!-- About -->
+            <p class="modal-detail__about-label">About</p>
+
+            <!-- Article -->
+            <p class="modal-detail__article">
+                Overview....
+            </p>
+
+            <!-- Buttons -->
+            <div class="modal-detail__buttons-wrapper">
+                <button type="button" class="modal-detail__btn modal-detail__btn--watched" data-status="watched*">Add to Watched</button>
+                <button type="button" class="modal-detail__btn modal-detail__btn--queue" data-status="in-queue*">Add to Queue</button>
+            </div>
         </div>
     </div>
 </div>
