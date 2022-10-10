@@ -18,24 +18,59 @@
 }
 
 .theme-toggle__icon-sun {
-    display: block;
+
+    display: none;
 }
 
 .theme-toggle__icon-moon {
-    display: none;
+
+    display: block;
 }
 
 body.dark-theme {
     & .movies-section {
-        background-color: #2f2f2f;
-        transition: background-color 300ms;
+        background-color: #272e34;
+    }
+
+    & .movies-section__title {
+        color: #fff;
+    }
+
+    & .movie__title {
+        color: #fff;
+    }
+
+    & .pagination li {
+        background-color: #ff6b01c2;
     }
 
     & .theme-toggle__icon-sun {
-        display: none;
+        display: block;
     }
 
     & .theme-toggle__icon-moon {
-        display: block;
+        display: none;
+    }
+
+    & .modal-detail {
+        background-color: #272e34;
+    }
+
+    & .modal-detail__title {
+        color: #fff;
+    }
+
+    & .modal-detail__col1,
+    & .modal-detail__col2 {
+        color: #fff;
+    }
+
+    & .modal-detail__about-label {
+        color: #fff;
+
+    }
+
+    & .modal-detail__article {
+        color: #fff;
     }
 }
