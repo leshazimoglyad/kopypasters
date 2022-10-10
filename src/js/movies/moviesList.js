@@ -44,7 +44,7 @@ function renderMoviesList(dataJSON) {
 }
 
 // Add events on pictures and checking downloading complete
-function attachOnloadToCards(cards) {
+export function attachOnloadToCards(cards) {
         cards.forEach((card) => {
                 // Get link and img refs
                 const img = card.firstElementChild;

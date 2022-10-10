@@ -1,7 +1,8 @@
 import { createMovieCard } from "../movies/movieCard";
+import { attachOnloadToCards } from "../movies/moviesList";
 import { loadFromStorage } from "../services/storage";
 
-export function initLibrary(params) {
+export function initLibrary() {
         // eventListeners
         refs.addToWatchedBtn.addEventListener("click", handleAddToWatchedBtn);
         refs.addToQueueBtn.addEventListener("click", handleAddToQueueBtn);
@@ -48,7 +49,7 @@ const watchedFilms = [
                 popularity: 186.12,
                 release_date: "2022-09-25",
                 video: false,
-                vote_average: 7.52,
+                vote_average: 7,
                 vote_count: 230,
         },
         {
@@ -189,6 +190,12 @@ function handleAddToWatchedBtn() {
         }
         const markup = renderWatchedFilms(watchedFilms);
         refs.gallery.insertAdjacentHTML("beforeend", markup);
+
+        // Get all cards
+        const cards = document.querySelectorAll(".movies-section__card");
+
+        // Add events to cards
+        attachOnloadToCards(cards);
 }
 
 function getWatchedFromLocalStorage() {
