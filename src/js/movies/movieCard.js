@@ -84,12 +84,7 @@ export function createMovieCard(movie, genreList) {
                                                 !isHome
                                                         ? `
                                                         <span class="movies-section__voteAverage">                                                        
-                                                                ${vote_average || "No vote"}${
-                                                                  (vote_average ^ 0) ===
-                                                                  vote_average
-                                                                          ? ".0"
-                                                                          : ""
-                                                          }
+                                                                ${vote_average ? vote_average.toFixed(1) : "No vote"}
                                                         </span>
                                                 `
                                                         : ""
