@@ -41,6 +41,9 @@ async function openModalWindow(e) {
                 return;
         }
 
+        // Clear image for first
+        refs.posterImage.setAttribute("src", blankImage);
+
         // Post req by id
         const filmInfo = await getMovieById(id);
 
@@ -52,15 +55,15 @@ async function openModalWindow(e) {
                 title = "NO TITLE",
                 original_title = "No original title",
                 overview = "No overview...",
-                popularity = 0,
-                vote_average = 0,
-                vote_count = 0,
+                popularity,
+                vote_average,
+                vote_count,
                 poster_path,
                 genres,
         } = filmInfo;
 
-        // Parse names of genres        
-        const genresStr = (genres.length > 0) ? parseGenres(genres) : "No genres";
+        // Parse names of genres
+        const genresStr = genres.length > 0 ? parseGenres(genres) : "No genres";
 
         // Title
         refs.title.innerText = title;
@@ -73,17 +76,17 @@ async function openModalWindow(e) {
                 : refs.posterImage.setAttribute("src", blankImage);
 
         // Original title
-        refs.orgTitle.innerText = original_title;
+        refs.orgTitle.innerText = original_title || "NO TITLE";
         // Popularity
-        refs.popularity.innerText = popularity.toFixed(2);
+        refs.popularity.innerText = popularity ? popularity.toFixed(2) : "No info";
         // Genres
-        refs.genres.innerText = genresStr;
+        refs.genres.innerText = genresStr || "No info";
         // Overview
-        refs.article.innerText = overview;
+        refs.article.innerText = overview || "No info";
         // Votes
-        refs.votesCount.innerText = vote_count;
+        refs.votesCount.innerText = vote_count || "0";
         // Avg votes
-        refs.votesAVG.innerText = vote_average.toFixed(1);
+        refs.votesAVG.innerText = vote_average ? vote_average.toFixed(1) : "0";
 
         const watched = refs.watchedBtn.getAttribute("data-status");
         const queue = refs.queueBtn.getAttribute("data-status");
