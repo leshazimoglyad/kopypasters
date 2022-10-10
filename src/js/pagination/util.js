@@ -1,5 +1,4 @@
 import { myPager } from "./init";
-import { scrollToTop } from "../interface/up-button";
 
 // useful functions
 export function createLi(item) {
@@ -29,7 +28,11 @@ export function replaceElement(newEl, el) {
 
 export function scrollToTop(selector) {
         var speed = 10;
-        window.scrollTo(0, 0);
+        window.scrollTo({
+                top: 0,
+                left: 0,
+                behavior: "smooth",
+        });
         Array.prototype.slice.call(document.querySelectorAll(selector)).forEach((item) => {
                 var _interval = setInterval(() => {
                         if (item.scrollTop <= 0) {
