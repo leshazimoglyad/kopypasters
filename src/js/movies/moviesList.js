@@ -55,7 +55,7 @@ export function attachOnloadToCards(cards) {
                         // Added random showing delay
                         setTimeout(() => {
                                 img.classList.add("loaded");
-                        }, getRndInteger(400, 1000));
+                        }, getRndInteger(200, 500));
                 };
         });
 }
