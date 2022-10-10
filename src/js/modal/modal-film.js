@@ -22,7 +22,7 @@ export default function initModalFilmDetails() {
 async function openModalWindow(e) {
         const filmCard = e.target;
         const id = filmCard.closest("div").getAttribute("data-id");
-        
+
         if (!id) {
                 return;
         }
@@ -37,32 +37,32 @@ async function openModalWindow(e) {
         const popularity = filmInfo.popularity.toFixed(2);
         const vote = filmInfo.vote_average.toFixed(1);
         const voteCount = filmInfo.vote_count;
-        const filmPosterValue = filmInfo.backdrop_path;
+        const filmPosterValue = filmInfo.poster_path;
         const filmPoster = `https://image.tmdb.org/t/p/w500${filmPosterValue}`;
-        console.log(filmPoster);
-        console.log(filmPosterValue);
+        //   console.log(filmPoster);
+        //   console.log(filmPosterValue);
 
         let modalRender = refs.modal.insertAdjacentHTML(
                 "afterbegin",
                 `<button class="close_btn">
        <svg width="32" height="32"><use href="./images/icons.svg#icon-close"></use></svg>
    </button>
-   <div class="modal_poster"><img src="${filmPoster}" alt=""/>
+   <div class="modal_poster"><img class="modal_img" src="${filmPoster}" alt=""/>
    </div>
    <div class="modal_info">
        <h2 class="modal_title">${title}</h2>
-       <table>
-           <tr>
-               <td class="vote">Vote/Votes</td>
-               <td class="votes-value">${vote}/${voteCount}</td>
+       <table class="modal_table">
+           <tr class="modal_table_raw">
+               <td class="vote data_name ">Vote/Votes</td>
+               <td class="votes-value data_value modal_table_data"><span class="vote_bcg">${vote}</span> /  ${voteCount}</td>
            </tr>
-           <tr>
-               <td class="popularity">Popularity</td>
-               <td class="popularity-value">${popularity}</td>
+           <tr class="modal_table_raw">
+               <td class="popularity data_name ">Popularity</td>
+               <td class="popularity-value data_value modal_table_data">${popularity}</td>
            </tr>
-           <tr>
-               <td class="original-title">Original title</td>
-               <td class="original-title-value">${originalTitle}</td>
+           <tr class="modal_table_raw">
+               <td class="original-title data_name ">Original title</td>
+               <td class="original-title-value data_value modal_table_data">${originalTitle}</td>
            </tr>
        </table>
 

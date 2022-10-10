@@ -40,8 +40,8 @@ button {
 
     @include mq(tablet) {
         display: flex;
-        justify-content: center;
-        align-items: center;
+        //   justify-content: center;
+        //   align-items: center;
         padding-left: 36px;
         width: 704px;
     }
@@ -55,10 +55,28 @@ button {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 20px;
+    @include mq("tablet") {
+        margin-right: 68px;
+    }
+    @include mq("desktop") {
+        margin-right: 16px;
+    }
 }
 .modal_img {
     width: 240px;
+    margin-bottom: 20px;
+    @include mq("tablet") {
+        margin-bottom: 0;
+        width: 264px;
+    }
+}
+.modal_title {
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 1.15;
+    @include mq("desktop") {
+        font-size: 30px;
+    }
 }
 .modal_txt,
 .modal_title,
@@ -69,18 +87,37 @@ button {
 .modal_article {
     margin-bottom: 20px;
 }
+
 .modal_txt {
     margin-bottom: 8px;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 1.33;
+}
+.modal_article {
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 1.66;
+    overflow: scroll;
 }
 .modal_info {
-    width: 240px;
+    min-width: 240px;
+    @include mq("tablet") {
+        min-width: 264px;
+    }
+    @include mq("desktop") {
+        min-width: 391px;
+    }
 }
 
 .modal_list_btn {
     display: flex;
-    justify-content: center;
+    //  justify-content: center;
     align-items: center;
     gap: 20px;
+    @include mq("desktop") {
+        margin-left: 24px;
+    }
 }
 .modal_list_button {
     width: 110px;
@@ -99,8 +136,8 @@ button {
 
 .close_btn {
     position: absolute;
-    top: 8px;
-    right: 8px;
+    top: 4px;
+    right: -4px;
     display: block;
     background-color: transparent;
     border: none;
@@ -109,4 +146,35 @@ button {
 }
 .close_btn_img {
     width: 14px;
+}
+
+// /Table
+.modal_table {
+    margin-bottom: 20px;
+    //  width: 50px;
+}
+.data_name {
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 1.33;
+    color: #8c8c8c;
+}
+.data_value {
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 1.16;
+}
+// .modal_table_column {
+//     width: 50px;
+// }
+.modal_table_data {
+    padding-left: 39px;
+}
+.vote_bcg {
+    border: 1px solid transparent;
+    border-radius: 5px;
+    width: 36px;
+    padding: 1px 10px;
+    color: #fff;
+    background-color: #ff6b01;
 }
