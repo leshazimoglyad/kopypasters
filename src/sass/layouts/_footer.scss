@@ -26,19 +26,9 @@
     justify-content: center;
     display: flex;
     flex-wrap: wrap;
-    padding-top: 28.71px;
-    padding-bottom: 29.7px;
+    padding-top: 30px;
+    padding-bottom: 30px;
     margin: 0 auto;
-    @include mq(tablet) {
-        padding-top: 30px;
-        padding-bottom: 30px;
-    }
-    @include mq(desktop) {
-        
-        padding-top: 28.71px;
-        padding-bottom: 29.7px;
-    
-    }
 }
 .footer-menu__item{
     display: flex;
