@@ -1,16 +1,122 @@
 import { createMovieCard } from "./movies/movieCard";
+import { loadFromStorage } from "./services/storage";
 
 const refs = {
         addToWatchedBtn: document.querySelector('[data-action="watched"]'),
         addToQueueBtn: document.querySelector('[data-action="queue"]'),
-        moviesContainer: document.querySelector(".movies-section__container"),
+        gallery: document.querySelector(".movies-section__grid"),
 };
 
+const genreList = loadFromStorage("genres");
+
+// eventListeners
 refs.addToWatchedBtn.addEventListener("click", handleAddToWatchedBtn);
 refs.addToQueueBtn.addEventListener("click", handleAddToQueueBtn);
 
-// Temporary local storage
+// TEMPORARY LOCAL STORAGE
 const watchedFilms = [
+        {
+                adult: false,
+                backdrop_path: "/3r3tZgKTw1554hcFoUfydLHE38w.jpg",
+                id: 338947,
+                title: "Hellraiser",
+                original_language: "en",
+                original_title: "Hellraiser",
+                overview: "A young woman struggling with addiction comes into possession of an ancient puzzle box, unaware that its purpose is to summon the Cenobites, a group of sadistic supernatural beings from another dimension.",
+                poster_path: "/f9ZAIUxTTk23vo1BC9Ur1Rx5c2E.jpg",
+                media_type: "movie",
+                genre_ids: [27, 9648],
+                popularity: 174.881,
+                release_date: "2022-09-28",
+                video: false,
+                vote_average: 6.631,
+                vote_count: 107,
+        },
+        {
+                adult: false,
+                backdrop_path: "/pfAZP7JvTTxqgq7n6A1OYgkAdEW.jpg",
+                id: 894205,
+                title: "Werewolf by Night",
+                original_language: "en",
+                original_title: "Werewolf by Night",
+                overview: "On a dark and somber night, a secret cabal of monster hunters emerge from the shadows and gather at the foreboding Bloodstone Temple following the death of their leader. In a strange and macabre memorial to the leader’s life, the attendees are thrust into a mysterious and deadly competition for a powerful relic—a hunt that will ultimately bring them face to face with a dangerous monster.",
+                poster_path: "/mvIvNKRIJPPS7WSFarFhOAGIVnU.jpg",
+                media_type: "movie",
+                genre_ids: [28, 14, 27, 9648],
+                popularity: 186.12,
+                release_date: "2022-09-25",
+                video: false,
+                vote_average: 7.52,
+                vote_count: 230,
+        },
+        {
+                adult: false,
+                backdrop_path: "/pfAZP7JvTTxqgq7n6A1OYgkAdEW.jpg",
+                id: 894205,
+                title: "Werewolf by Night",
+                original_language: "en",
+                original_title: "Werewolf by Night",
+                overview: "On a dark and somber night, a secret cabal of monster hunters emerge from the shadows and gather at the foreboding Bloodstone Temple following the death of their leader. In a strange and macabre memorial to the leader’s life, the attendees are thrust into a mysterious and deadly competition for a powerful relic—a hunt that will ultimately bring them face to face with a dangerous monster.",
+                poster_path: "/mvIvNKRIJPPS7WSFarFhOAGIVnU.jpg",
+                media_type: "movie",
+                genre_ids: [28, 14, 27, 9648],
+                popularity: 186.12,
+                release_date: "2022-09-25",
+                video: false,
+                vote_average: 7.52,
+                vote_count: 230,
+        },
+        {
+                adult: false,
+                backdrop_path: "/pfAZP7JvTTxqgq7n6A1OYgkAdEW.jpg",
+                id: 894205,
+                title: "Werewolf by Night",
+                original_language: "en",
+                original_title: "Werewolf by Night",
+                overview: "On a dark and somber night, a secret cabal of monster hunters emerge from the shadows and gather at the foreboding Bloodstone Temple following the death of their leader. In a strange and macabre memorial to the leader’s life, the attendees are thrust into a mysterious and deadly competition for a powerful relic—a hunt that will ultimately bring them face to face with a dangerous monster.",
+                poster_path: "/mvIvNKRIJPPS7WSFarFhOAGIVnU.jpg",
+                media_type: "movie",
+                genre_ids: [28, 14, 27, 9648],
+                popularity: 186.12,
+                release_date: "2022-09-25",
+                video: false,
+                vote_average: 7.52,
+                vote_count: 230,
+        },
+        {
+                adult: false,
+                backdrop_path: "/pfAZP7JvTTxqgq7n6A1OYgkAdEW.jpg",
+                id: 894205,
+                title: "Werewolf by Night",
+                original_language: "en",
+                original_title: "Werewolf by Night",
+                overview: "On a dark and somber night, a secret cabal of monster hunters emerge from the shadows and gather at the foreboding Bloodstone Temple following the death of their leader. In a strange and macabre memorial to the leader’s life, the attendees are thrust into a mysterious and deadly competition for a powerful relic—a hunt that will ultimately bring them face to face with a dangerous monster.",
+                poster_path: "/mvIvNKRIJPPS7WSFarFhOAGIVnU.jpg",
+                media_type: "movie",
+                genre_ids: [28, 14, 27, 9648],
+                popularity: 186.12,
+                release_date: "2022-09-25",
+                video: false,
+                vote_average: 7.52,
+                vote_count: 230,
+        },
+        {
+                adult: false,
+                backdrop_path: "/pfAZP7JvTTxqgq7n6A1OYgkAdEW.jpg",
+                id: 894205,
+                title: "Werewolf by Night",
+                original_language: "en",
+                original_title: "Werewolf by Night",
+                overview: "On a dark and somber night, a secret cabal of monster hunters emerge from the shadows and gather at the foreboding Bloodstone Temple following the death of their leader. In a strange and macabre memorial to the leader’s life, the attendees are thrust into a mysterious and deadly competition for a powerful relic—a hunt that will ultimately bring them face to face with a dangerous monster.",
+                poster_path: "/mvIvNKRIJPPS7WSFarFhOAGIVnU.jpg",
+                media_type: "movie",
+                genre_ids: [28, 14, 27, 9648],
+                popularity: 186.12,
+                release_date: "2022-09-25",
+                video: false,
+                vote_average: 7.52,
+                vote_count: 230,
+        },
         {
                 adult: false,
                 backdrop_path: "/pfAZP7JvTTxqgq7n6A1OYgkAdEW.jpg",
@@ -73,12 +179,14 @@ localStorage.setItem("queuedFilms", JSON.stringify(queuedFilms));
 function handleAddToWatchedBtn() {
         refs.addToQueueBtn.classList.remove("library-btn--active");
         refs.addToWatchedBtn.classList.add("library-btn--active");
+        clearGallery();
         const watchedfilms = getWatchedFromLocalStorage();
         if (watchedFilms.length === 0) {
-                // displayMessage();
+                displayMessage();
                 return;
         }
-        renderWatchedFilms(watchedfilms);
+        const markup = renderWatchedFilms(watchedfilms);
+        refs.gallery.insertAdjacentHTML("beforeend", markup);
 }
 
 function getWatchedFromLocalStorage() {
@@ -93,10 +201,11 @@ function getWatchedFromLocalStorage() {
 }
 
 function renderWatchedFilms(watchedFilms) {
-        return watchedFilms.map((film) => {
-                createMovieCard(film);
-                console.log(film);
-        });
+        return watchedFilms
+                .map((film) => {
+                        return createMovieCard(film, genreList);
+                })
+                .join("");
 }
 
 // QUEUED
@@ -104,9 +213,11 @@ function renderWatchedFilms(watchedFilms) {
 function handleAddToQueueBtn() {
         refs.addToQueueBtn.classList.add("library-btn--active");
         refs.addToWatchedBtn.classList.remove("library-btn--active");
+        clearGallery();
         const queuedFilms = getQueuedFromLocalStorage();
         if (queuedFilms.length === 0) {
                 console.log("no films yet");
+                displayMessage();
                 return;
         }
         renderQueuedFilms(queuedFilms);
@@ -131,9 +242,17 @@ function renderQueuedFilms(queuedFilms) {
         });
 }
 
+//to display message when there are no films in WATCHED/ QUEUE:
+
 function displayMessage() {
+        // refs.moviesContainer.innerHTML = "Oops, seems like you have not added any films yet.";
+        // OR
         const message = document.createElement("p");
-        refs.moviesContainer.append(message);
+        refs.gallery.append(message);
         message.classList.add("movies-section__message");
-        message.innerText = "Oops, seems like you haven't added any films yet.";
+        message.textContent = "Oops, seems like you haven't added any films yet.";
+}
+
+function clearGallery() {
+        refs.gallery.innerHTML = "";
 }
