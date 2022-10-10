@@ -1,4 +1,5 @@
 import { myPager } from "./init";
+import { scrollToTop } from "../interface/up-button";
 
 // useful functions
 export function createLi(item) {
@@ -45,4 +46,5 @@ export function noop() {}
 
 export function nextPage() {
         myPager.goToPage(myPager.getCurrentPage() + 1);
+        scrollToTop();
 }
