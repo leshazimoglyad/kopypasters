@@ -26,25 +26,9 @@
     justify-content: center;
     display: flex;
     flex-wrap: wrap;
-    padding-top: 28.71px;
-    padding-bottom: 29.7px;
+    padding-top: 30px;
+    padding-bottom: 30px;
     margin: 0 auto;
-
-    @media screen and (max-width: 767px) {
-        width: 320px;
-    }
-    @media screen and (min-width: 768px) {
-        flex-wrap: nowrap;
-        width: 768px;
-        padding-top: 22px;
-        padding-bottom: 22px;
-    }
-
-    @media screen and (min-width: 1200px) {
-        padding-top: 22px;
-        padding-bottom: 22px;
-
-    }
 }
 .footer-menu__item {
     display: flex;
