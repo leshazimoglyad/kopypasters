@@ -3,8 +3,12 @@ const refs = {
         closeBtn: document.querySelector(".close_btn"),
         openBtn: document.querySelector(".movies-section__grid"),
 };
+
+
 refs.openBtn.addEventListener("click", openModalWindow);
 refs.closeBtn.addEventListener("click", closeModal);
+
+
 
 function openModalWindow(e) {
         const filmCard = e.target.nodeName;

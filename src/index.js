@@ -11,3 +11,5 @@ import "./js/init";
 import "./js/movies";
 // modal-film
 import "./js/modal/modal-film";
+// trailer_wondow
+import "./js/modal/trailer_window"
