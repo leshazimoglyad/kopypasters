@@ -1,6 +1,3 @@
-$color-primary: #3d314a;
-$color-secondary: #f5f1ed;
-
 .movies-section {
     min-height: calc(100vh - 332px);
 
@@ -175,16 +172,6 @@ $color-secondary: #f5f1ed;
             width: 40px;
             height: 20px;
         }
-    }
-}
-
-// Roll for spinner
-@keyframes roll {
-    0% {
-        top: 0px;
-    }
-    100% {
-        top: -15px;
     }
 }
 

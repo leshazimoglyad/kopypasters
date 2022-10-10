@@ -5,15 +5,16 @@ import "./js/services/fetch";
 import "./js/pagination";
 import "./js/paginationLibrary";
 
-// Init
-
-import "./js/init";
-
-// Movies gallery
-import "./js/movies";
 // All modals
 import "./js/modal/index";
 
 // import "./js/interface/theme-toggle";
 
 //Library
+import "./js/modal";
+
+// Toggle theme
+import "./js/interface/theme-toggle";
+
+// Init
+import "./js/init";
