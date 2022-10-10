@@ -75,6 +75,9 @@ async function openModalWindow(e) {
            <li>
                <button type="button" class="modal_list_button btn_secondary">Add to Queue</button>
            </li>
+           <li>
+               <button type="button" class="modal_list_button btn_watch-trailer">Watch movie trailer</button>
+           </li>
        </ul>
    </div>`,
         );
