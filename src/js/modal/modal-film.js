@@ -1,3 +1,4 @@
+import { loadingSpinnerToggle } from "../interface/spinner";
 import { getGenresByID } from "../movies/movieCard";
 import { fetchMovieById } from "../services/fetch";
 import { loadFromStorage } from "../services/storage";
@@ -18,24 +19,25 @@ export default function initModalFilmDetails() {
         refs.closeBtn.addEventListener("click", closeModal);
 }
 
-
 async function openModalWindow(e) {
-        const genreList = loadFromStorage("genres");
         const filmCard = e.target;
         const id = filmCard.closest("div").getAttribute("data-id");
-        if (id) {
-                refs.modalWindow.classList.toggle("is-hidden");
+        
+        if (!id) {
+                return;
         }
 
         const filmInfo = await getMovieById(id);
         console.log(filmInfo);
+        const genreList = loadFromStorage("genres");
+        refs.modalWindow.classList.toggle("is-hidden");
         const title = filmInfo.title;
         const originalTitle = filmInfo.original_title;
         const overview = filmInfo.overview;
         const popularity = filmInfo.popularity.toFixed(2);
         const vote = filmInfo.vote_average.toFixed(1);
         const voteCount = filmInfo.vote_count;
-        const filmPosterValue = filmInfo.backdrop_path; 
+        const filmPosterValue = filmInfo.backdrop_path;
         const filmPoster = `https://image.tmdb.org/t/p/w500${filmPosterValue}`;
         console.log(filmPoster);
         console.log(filmPosterValue);
@@ -88,8 +90,8 @@ function closeModal() {
 async function getMovieById(id) {
         try {
                 // spinner
-                // loadingSpinnerToggle();
-                // await new Promise((resolve) => setTimeout(resolve, 300));
+                loadingSpinnerToggle();
+                await new Promise((resolve) => setTimeout(resolve, 300));
 
                 // Send http req, trying get the pictures
                 const response = await fetchMovieById(id);
@@ -107,7 +109,8 @@ async function getMovieById(id) {
                 const dataJSON = response.data;
 
                 // Hide loading spinner
-                // loadingSpinnerToggle();
+                loadingSpinnerToggle();
+
                 return dataJSON;
         } catch (error) {
                 console.log(error);
