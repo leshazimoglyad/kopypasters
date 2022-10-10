@@ -1,5 +1,5 @@
-import { createMovieCard } from "./movies/movieCard";
-import { loadFromStorage } from "./services/storage";
+import { createMovieCard } from "../movies/movieCard";
+import { loadFromStorage } from "../services/storage";
 
 const refs = {
         addToWatchedBtn: document.querySelector('[data-action="watched"]'),
@@ -209,7 +209,6 @@ function renderWatchedFilms(watchedFilms) {
 }
 
 // QUEUED
-
 function handleAddToQueueBtn() {
         refs.addToQueueBtn.classList.add("library-btn--active");
         refs.addToWatchedBtn.classList.remove("library-btn--active");
@@ -256,3 +255,5 @@ function displayMessage() {
 function clearGallery() {
         refs.gallery.innerHTML = "";
 }
+
+export { handleAddToQueueBtn, handleAddToWatchedBtn };
