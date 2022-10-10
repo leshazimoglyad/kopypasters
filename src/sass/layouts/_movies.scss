@@ -107,6 +107,18 @@ $color-secondary: #f5f1ed;
         font-weight: 600;
         // font-family: $font;
     }
+
+    &__message {
+        text-align: center;
+        margin-top: auto;
+        color: $color-primary;
+        letter-spacing: 1px;
+        font-weight: 500;
+
+        &--bold {
+            font-weight: 600;
+        }
+    }
     &__filmstrip {
         position: relative;
         overflow: hidden;

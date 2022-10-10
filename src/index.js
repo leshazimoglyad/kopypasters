@@ -12,6 +12,8 @@ import "./js/init";
 // Movies gallery
 import "./js/movies";
 // All modals
-import "./js/modal/index"
+import "./js/modal/index";
 
-import "./js/interface/theme-toggle";
+// import "./js/interface/theme-toggle";
+
+//Library
