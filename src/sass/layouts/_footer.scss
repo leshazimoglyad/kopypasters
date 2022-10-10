@@ -29,6 +29,7 @@
     padding-top: 28.71px;
     padding-bottom: 29.7px;
     margin: 0 auto;
+
     @media screen and (max-width: 767px) {
         width: 320px;
     }
@@ -42,6 +43,7 @@
     @media screen and (min-width: 1200px) {
         padding-top: 22px;
         padding-bottom: 22px;
+
     }
 }
 .footer-menu__item {
@@ -75,6 +77,21 @@
     width: 14px;
     height: 12.88px;
     margin-left: 5px;
+
+
+    margin-right:5px;
+
+}
+.footer-menu__text{
+    margin-bottom: 9.9px;
+    @include mq(tablet){
+        margin-bottom: 0px;
+
+    }}
+    
+.footer-menu__text-two{
+    margin-left: 3px;
+
     margin-right: 5px;
 }
 
