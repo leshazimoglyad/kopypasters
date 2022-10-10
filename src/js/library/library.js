@@ -180,12 +180,12 @@ function handleAddToWatchedBtn() {
         refs.addToQueueBtn.classList.remove("library-btn--active");
         refs.addToWatchedBtn.classList.add("library-btn--active");
         clearGallery();
-        const watchedfilms = getWatchedFromLocalStorage();
+        const watchedFilms = getWatchedFromLocalStorage();
         if (watchedFilms.length === 0) {
                 displayMessage();
                 return;
         }
-        const markup = renderWatchedFilms(watchedfilms);
+        const markup = renderWatchedFilms(watchedFilms);
         refs.gallery.insertAdjacentHTML("beforeend", markup);
 }
 
@@ -215,11 +215,11 @@ function handleAddToQueueBtn() {
         clearGallery();
         const queuedFilms = getQueuedFromLocalStorage();
         if (queuedFilms.length === 0) {
-                console.log("no films yet");
                 displayMessage();
                 return;
         }
-        renderQueuedFilms(queuedFilms);
+        const markup = renderQueuedFilms(queuedFilms);
+        refs.gallery.insertAdjacentHTML("beforeend", markup);
 }
 
 function getQueuedFromLocalStorage() {
@@ -244,12 +244,8 @@ function renderQueuedFilms(queuedFilms) {
 //to display message when there are no films in WATCHED/ QUEUE:
 
 function displayMessage() {
-        // refs.moviesContainer.innerHTML = "Oops, seems like you have not added any films yet.";
-        // OR
-        const message = document.createElement("p");
-        refs.gallery.append(message);
-        message.classList.add("movies-section__message");
-        message.textContent = "Oops, seems like you haven't added any films yet.";
+        const messageMarkup = `<p class="movies-section__message"> Oops, seems like it's empty. Go to <a href="./index.html" class="movies-section__message--bold">Home</a> to add some films.</p>`;
+        refs.gallery.insertAdjacentHTML("beforeend", messageMarkup);
 }
 
 function clearGallery() {

@@ -18,6 +18,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 getGenres();
                 getMovieByName_deb({ pagination: true });
+                return;
         } else {
                 const refs = {
                         addToWatchedBtn: document.querySelector('[data-action="watched"]'),
