@@ -29,7 +29,8 @@ const refs = {
 // Init attaching
 export default function initModalFilmDetails() {
         refs.grid.addEventListener("click", openModalWindow);
-        refs.closeBtn.addEventListener("click", closeModal);
+        // refs.closeBtn.addEventListener("click", closeModal);
+        refs.modalDetailOverlay.addEventListener("click", closeModal);
 }
 
 // Join genres array to string
@@ -119,8 +120,8 @@ async function openModalWindow(e) {
         // Avg votes
         refs.votesAVG.innerText = vote_average ? vote_average.toFixed(1) : "0";
 
-        const watched = refs.watchedBtn.getAttribute("data-status");
-        const queue = refs.queueBtn.getAttribute("data-status");
+        // const watched = refs.watchedBtn.getAttribute("data-status");
+        // const queue = refs.queueBtn.getAttribute("data-status");
 
         // Check statuses
         // checkStatuses(watched, queue);
@@ -157,7 +158,16 @@ function handleQueue() {}
 // }
 
 // Close modal
-function closeModal() {
+function closeModal(e) {
+        // Closest parent is "button" and class is "backdrop"
+        if (!e.target.closest("button") && !e.target.classList.contains("backdrop")) {
+                return;
+        }
+
+        // Not close buttons
+        if (e.target.classList.contains("modal-detail__btn")) return;
+
+        // Toggle hidden class
         refs.modalDetailOverlay.classList.toggle("is-hidden");
 
         // Show scroll on body
