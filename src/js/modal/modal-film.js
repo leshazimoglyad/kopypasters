@@ -55,11 +55,19 @@ export function parseGenres(genres) {
 
 // Get trailer video from videosList
 function parseTrailers(trailersList) {
+        console.log(trailersList);
         for (const video of trailersList) {
                 // заменяем if (video.name === "Official Trailer")===============================================
-                 if (video.name.includes("Official Trailer")) {
+                if (video.name.includes("Official Trailer")) {
                         return `${YOUTUBE_URL}${video.key}`;
                 }
+                else if (video.name.includes("Trailer")) {
+                        return `${YOUTUBE_URL}${video.key}`
+                }
+                else if (video.name) {
+                        return `${YOUTUBE_URL}${video.key}`
+                } 
+                        
         }
 }
 
@@ -131,6 +139,7 @@ async function openMovieDetailModal(e) {
 
         // function that opens videoTrailer=================================================================
         function openVideoTrailer() {
+
                 refs.backdropTrailer.classList.remove("unshown");
                 refs.backdropTrailer.firstElementChild.src = trailer;
         }
