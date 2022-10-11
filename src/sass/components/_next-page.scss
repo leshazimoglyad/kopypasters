@@ -1,13 +1,13 @@
-.movie {
+.next-card {
     display: none;
 }
 
 @media screen and (min-width: 1200px) {
-.movie {
+.next-card {
     display: block;
     }
 
-.movie__container {
+.next-card__container {
     padding: 0;
 
     display: block;
@@ -19,7 +19,7 @@
 
 }
 
-.movie__image-container {
+.next-card__image-container {
     display: block;
 
     border-radius: 5px;
@@ -39,7 +39,7 @@
     }
 }
 
-.movie__image {
+.next-card__image {
     width: 368px;
     height: 570px;
 
@@ -47,7 +47,7 @@
     fill: currentColor;
 }
 
-.movie__data {
+.next-card__data {
     display: block;
     margin-top: 10px;
     font-size: 20px;
