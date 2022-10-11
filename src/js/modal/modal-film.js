@@ -2,12 +2,15 @@ import { loadingSpinnerToggle } from "../interface/spinner";
 import { fetchMovieDetailsById } from "../services/fetch";
 import { scrollableBody } from "../helpers";
 
-const YOUTUBE_URL = "https://www.youtube.com/watch?v=";
+
+// changed  'watch?v=' to 'embed' ===============================================
+const YOUTUBE_URL = "https://www.youtube.com/embed/";
 const WATCHED_STORE = "watchedFilms";
 const QUEUED_STORE = "queuedFilms";
 
 let id;
 let filmInfoParsed;
+
 
 // Blank image
 import blankImage from "../../images/no-image.svg";
@@ -34,8 +37,15 @@ const refs = {
         article: document.querySelector(".modal-detail__article"),
         youtubeLink: document.querySelector(".modal-detail__youtube-link"),
 
-        watchBtn: document.getElementById("watch-btn"),
-        queueBtn: document.getElementById("queue-btn"),
+        
+        watchedBtn: document.querySelector(".modal-detail__btn--watched"),
+        queueBtn: document.querySelector(".modal-detail__btn--queue"),
+
+
+        // get references from DOM ===========================================================================
+        openTrailerBtn: document.querySelector('[data-action="openTrailerVideo"]'),
+        backdropTrailer: document.querySelector('.backdrop_trailer'),
+
 };
 
 // Init attaching
@@ -98,6 +108,9 @@ async function openMovieDetailModal(e) {
                 videos: { results: trailersList },
         } = filmInfo;
 
+
+        //  YouTube link to video trailer 
+
         // Save temp object
         filmInfoParsed = {
                 id,
@@ -114,8 +127,28 @@ async function openMovieDetailModal(e) {
         };
 
         // Film trailer
+
         const trailer = parseTrailers(trailersList);
+        
+        
         trailer && refs.youtubeLink.setAttribute("href", trailer);
+        
+        // listeners for openTrailerBtn and backdrop=========================================================
+        refs.openTrailerBtn.addEventListener('click', openVideoTrailer);
+        refs.backdropTrailer.addEventListener('click', closeTrailerWindow);
+       
+        // function that opens videoTrailer=================================================================
+        function openVideoTrailer() {
+                refs.backdropTrailer.classList.remove('unshown');
+                refs.backdropTrailer.firstElementChild.src = trailer;
+        } 
+
+        // function that closes videoTrailer=================================================================
+        function closeTrailerWindow() {
+                refs.backdropTrailer.classList.add('unshown');
+                refs.backdropTrailer.firstElementChild.src = '';
+        }
+
 
         // Parse names of genres
         const genresStr = genres.length > 0 ? parseGenres(genres) : "No genres";
@@ -126,9 +159,9 @@ async function openMovieDetailModal(e) {
         // Poster image
         poster_path
                 ? refs.posterImage.setAttribute(
-                          "src",
-                          `https://image.tmdb.org/t/p/w500${poster_path}`,
-                  )
+                        "src",
+                        `https://image.tmdb.org/t/p/w500${poster_path}`,
+                )
                 : refs.posterImage.setAttribute("src", blankImage);
 
         // Original title
@@ -148,6 +181,17 @@ async function openMovieDetailModal(e) {
 
         // Avg votes
         refs.votesAVG.innerText = vote_average ? vote_average.toFixed(1) : "0";
+
+
+        // YouTube link for video trailer============================================================
+        refs.backdropTrailer.firstElementChild.src = trailer;
+        
+      
+        // const watched = refs.watchedBtn.getAttribute("data-status");
+        // const queue = refs.queueBtn.getAttribute("data-status");
+
+       
+
 
         // Check statuses
         setButtonStatus("all", checkLibrary(id));
