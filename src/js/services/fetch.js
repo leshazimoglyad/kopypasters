@@ -75,7 +75,7 @@ export const fetchMovieById = async (id) => {
         return axios.get(`${url}${urlId}?${param.toString()}`);
 };
 
-// ф-я запроса видео-трейлера на филь по id
+// ф-я запроса видео-трейлера на фильм по id
 export const fetchTrailerMovieById = async (id) => {
         let url = URL;
 

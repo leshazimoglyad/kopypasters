@@ -1,10 +1,20 @@
-import { loadingSpinnerToggle } from "../interface/spinner";
-import { fetchTrailerMovieById } from "../services/fetch";
+// import { loadingSpinnerToggle } from "../interface/spinner";
+// import { fetchTrailerMovieById } from "../services/fetch";
+// import { removeFromStorage } from "../services/storage";
 
 
 
 
 
+//  function openTrailerMovie() {
+//     const filmCard = e.target;
+//     const id = filmCard.closest("div").getAttribute("data-id");
+        
+//     if (!id) {
+//         return;
+//     }
+
+// }
 
 // import TrailerService from '../services/fetchTrailerMovie'
 

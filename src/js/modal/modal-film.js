@@ -1,8 +1,12 @@
 import { loadingSpinnerToggle } from "../interface/spinner";
-import { fetchMovieById } from "../services/fetch";
+import { fetchMovieById, fetchTrailerMovieById } from "../services/fetch";
 
 // Blank image
 import blankImage from "../../images/no-image.svg";
+
+// импорт
+
+
 
 const refs = {
         grid: document.querySelector(".movies-section__grid"),
@@ -20,6 +24,7 @@ const refs = {
         watchedBtn: document.querySelector(".modal-detail__btn--watched"),
         queueBtn: document.querySelector(".modal-detail__btn--queue"),
 };
+
 
 export default function initModalFilmDetails() {
         refs.grid.addEventListener("click", openModalWindow);
@@ -46,6 +51,18 @@ async function openModalWindow(e) {
 
         // Post req by id
         const filmInfo = await getMovieById(id);
+        
+        // // // в дата - объект с инфой, что пришел с Api============
+        // const data = await fetchTrailerMovieById(id);
+        // //  info - массив с объектами (в каждом объект есть 1 видео)
+        // const info = data.data.results;
+        // info.forEach(element => {
+        //         if (element.name === 'Official Trailer') {
+        //                 // ключ для видео в Ютубе
+        //                 const keyforYouTube = element.key      
+        //                 console.log(keyforYouTube);       
+        //         }          
+        // });
 
         // Show modal
         refs.modalDetailOverlay.classList.toggle("is-hidden");
