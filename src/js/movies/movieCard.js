@@ -24,6 +24,7 @@ export function createMovieCard(movie, genreList) {
                 // backdrop_path,
                 poster_path,
                 title,
+                name,
                 // original_title,
                 genre_ids,
                 release_date,
@@ -38,7 +39,7 @@ export function createMovieCard(movie, genreList) {
 
         // Cut long strings
         genres = genres.length > 24 ? `${genres.slice(0, 24)}...` : genres;
-        let filmTitle = title;
+        let filmTitle = title || name;
         filmTitle = filmTitle.length > 24 ? `${filmTitle.slice(0, 24)}...` : filmTitle;
 
         // Preparing url, check posterImage on NULL
@@ -84,7 +85,13 @@ export function createMovieCard(movie, genreList) {
                                                 !isHome
                                                         ? `
                                                         <span class="movies-section__voteAverage">                                                        
-                                                                ${vote_average ? vote_average.toFixed(1) : "No vote"}
+                                                                ${
+                                                                        vote_average
+                                                                                ? vote_average.toFixed(
+                                                                                          1,
+                                                                                  )
+                                                                                : "No vote"
+                                                                }
                                                         </span>
                                                 `
                                                         : ""
