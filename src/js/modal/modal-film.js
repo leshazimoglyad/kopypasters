@@ -2,11 +2,17 @@ import { loadingSpinnerToggle } from "../interface/spinner";
 import { fetchMovieDetailsById } from "../services/fetch";
 import { scrollableBody } from "../helpers";
 import { appendToStorage, removeKeyFromStorage, saveToStorage } from "../services/storage";
-import { getQueuedFromLocalStorage, getWatchedFromLocalStorage } from "../library/library";
+import {
+        getQueuedFromLocalStorage,
+        getWatchedFromLocalStorage,
+        showQueuedFilms,
+        showWatchedFilms,
+} from "../library/library";
 import { deattachTrailer, initTrailer } from "./trailer";
 
 // Blank image
 import blankImage from "../../images/no-image.svg";
+import { isHome } from "../init";
 
 // Items in local storage
 const WATCHED_STORE = "watchedFilms";
@@ -248,6 +254,14 @@ function closeModal(e) {
 
         // Deattach trailer
         deattachTrailer();
+        if (!isHome) {
+                const watchedButtonEl = document.querySelector("[data-action='watched']");
+                if (watchedButtonEl.classList.contains("library-btn--active")) {
+                        showWatchedFilms();
+                } else {
+                        showQueuedFilms();
+                }
+        }
 }
 
 // Fetch movie by ID

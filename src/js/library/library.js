@@ -44,7 +44,7 @@ function handleShowWatchedFilms() {
 }
 
 // WATCHED
-export function showWatchedFilms() {
+function showWatchedFilms() {
         refs.queueBtn.classList.remove("library-btn--active");
         refs.watchedBtn.classList.add("library-btn--active");
         clearGallery();
@@ -100,7 +100,7 @@ function handleShowQueuedFilms() {
 }
 
 // QUEUED
-export function showQueuedFilms() {
+function showQueuedFilms() {
         refs.queueBtn.classList.add("library-btn--active");
         refs.watchedBtn.classList.remove("library-btn--active");
         clearGallery();
