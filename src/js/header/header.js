@@ -1,4 +1,4 @@
-import { getMovieByName_deb } from "../movies";
+import { getMovieByName_deb } from "../movies/movies";
 
 // Refs to DOM elements
 const searchElem = document.querySelector(".search__input");

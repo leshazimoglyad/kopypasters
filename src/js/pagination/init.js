@@ -1,5 +1,5 @@
 import Pagination from "../pagination/index.js";
-import { getMovieByName_deb } from "../movies";
+import { getMovieByName_deb } from "../movies/movies";
 
 // Globar var for pagination instance
 export let myPager;
