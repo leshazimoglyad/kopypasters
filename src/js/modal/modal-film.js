@@ -56,7 +56,8 @@ export function parseGenres(genres) {
 // Get trailer video from videosList
 function parseTrailers(trailersList) {
         for (const video of trailersList) {
-                if (video.name === "Official Trailer") {
+                // заменяем if (video.name === "Official Trailer")===============================================
+                 if (video.name.includes("Official Trailer")) {
                         return `${YOUTUBE_URL}${video.key}`;
                 }
         }
