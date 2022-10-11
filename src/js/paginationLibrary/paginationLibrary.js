@@ -5,6 +5,8 @@ export default class PaginationLibrary {
                 this.currentPage = 1;
                 this.paginationContainerClass = "";
                 this.btnInPagination = btnInPagination;
+                this.firstIndexOfArray = 0;
+                this.lastIndexOfArray = 0;
         }
         get paginationContainer() {
                 return this.paginationContainerClass;
@@ -14,11 +16,32 @@ export default class PaginationLibrary {
                 this.paginationContainerClass = newContainerClass;
         }
 
+        get current() {
+                return this.currentPage;
+        }
+
+        set current(newCurrentPage) {
+                this.currentPage = newCurrentPage;
+        }
+
         clearPaginationLibrary() {
                 const paginationContainer = document.querySelector(
                         `.${this.paginationContainerClass}`,
                 );
                 paginationContainer.innerHTML = "";
+        }
+
+        calculateIndexesOfArray() {
+                this.firstIndexOfArray =
+                        this.currentPage > 0 ? (this.currentPage - 1) * this.perPage : 0;
+                this.lastIndexOfArray = 0;
+                if (this.currentPage > 0) {
+                        if (this.currentPage * this.perPage - 1 < this.totalElements) {
+                                this.lastIndexOfArray = this.currentPage * this.perPage - 1;
+                        } else {
+                                this.lastIndexOfArray = this.totalElements - 1;
+                        }
+                }
         }
 
         getTextForPaginationBtn(totalOfBtn, currentBtn) {
@@ -117,21 +140,23 @@ export default class PaginationLibrary {
                 return txtOfBtn;
         }
 
-        initPagination(_totalElements, _perPage, currentPage = 1) {
+        initPagination(_totalElements, _perPage, renderCards) {
                 this.totalElements = _totalElements;
                 this.perPage = _perPage;
-                this.currentPage = Number(currentPage);
+                // console.log(this.currentPage);
+                // this.currentPage = Number(currentPage);
                 this.clearPaginationLibrary();
                 const ul = document.createElement("ul");
                 ul.classList.add("pagination-list");
-                // console.log('totalElements', totalElements);
-                // console.log('totalElements', perPage);
+                // console.log("totalElements", totalElements);
+                // console.log("PerPage", perPage);
                 const totalOfBtn = Math.ceil(this.totalElements / this.perPage);
-                this.btnInPagination = Math.min(totalOfBtn, this.btnInPagination);
+                // console.log(totalOfBtn);
+                const countBtnInPagination = Math.min(totalOfBtn, this.btnInPagination);
                 if (totalOfBtn > 1) {
                         ul.appendChild(this.createLi("arrow-left", totalOfBtn));
                 }
-                for (let i = 1; i <= this.btnInPagination; i += 1) {
+                for (let i = 1; i <= countBtnInPagination; i += 1) {
                         ul.appendChild(
                                 this.createLi(
                                         this.getTextForPaginationBtn(totalOfBtn, i),
@@ -146,7 +171,7 @@ export default class PaginationLibrary {
                         if (evt.target.nodeName !== "LI") {
                                 return;
                         }
-                        this.action(evt.target.dataset.page);
+                        this.action(evt.target.dataset.page, renderCards);
                 });
                 const paginationContainer = document.querySelector(
                         `.${this.paginationContainerClass}`,
@@ -154,9 +179,12 @@ export default class PaginationLibrary {
                 paginationContainer.appendChild(ul);
         }
 
-        action(page) {
+        action(page, renderCards) {
                 // Function that rewrite movie form localStorage must be here
-                this.initPagination(totalElements, perPage, page);
+                this.currentPage = Number(page);
+                renderCards();
+                // this.initPagination(this.totalElements, this.perPage, renderCards);
+                // console.log(this.currentPage);
         }
 
         createLi(item, totalOfBtn) {
