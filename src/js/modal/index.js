@@ -6,4 +6,3 @@ import "./trailer_window";
 
 //Footer modal
 import "./modal-footer";
-import "./modalFootertTeam";
