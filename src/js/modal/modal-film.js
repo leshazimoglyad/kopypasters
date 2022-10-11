@@ -1,24 +1,20 @@
 import { loadingSpinnerToggle } from "../interface/spinner";
 import { fetchMovieDetailsById } from "../services/fetch";
 import { scrollableBody } from "../helpers";
+import { appendToStorage, removeKeyFromStorage, saveToStorage } from "../services/storage";
+import { getQueuedFromLocalStorage, getWatchedFromLocalStorage } from "../library/library";
+import { deattachTrailer, initTrailer } from "./trailer";
 
-// changed  'watch?v=' to 'embed' ===============================================
-const YOUTUBE_URL = "https://www.youtube.com/embed/";
+// Blank image
+import blankImage from "../../images/no-image.svg";
+
+// Items in local storage
 const WATCHED_STORE = "watchedFilms";
 const QUEUED_STORE = "queuedFilms";
 
 let id;
+// Obj for save to store
 let filmInfoParsed;
-
-// Blank image
-import blankImage from "../../images/no-image.svg";
-import {
-        appendToStorage,
-        loadFromStorage,
-        removeKeyFromStorage,
-        saveToStorage,
-} from "../services/storage";
-import { getQueuedFromLocalStorage, getWatchedFromLocalStorage } from "../library/library";
 
 // References to elements
 const refs = {
@@ -33,14 +29,9 @@ const refs = {
         orgTitle: document.querySelector(".modal-detail__org-title"),
         genres: document.querySelector(".modal-detail__genres"),
         article: document.querySelector(".modal-detail__article"),
-        youtubeLink: document.querySelector(".modal-detail__youtube-link"),
 
         watchBtn: document.getElementById("watch-btn"),
         queueBtn: document.getElementById("queue-btn"),
-
-        // get references from DOM ===========================================================================
-        openTrailerBtn: document.querySelector('[data-action="openTrailerVideo"]'),
-        backdropTrailer: document.querySelector(".backdrop_trailer"),
 };
 
 // Init attaching
@@ -51,24 +42,6 @@ export default function initModalFilmDetails() {
 // Join genres array to string
 export function parseGenres(genres) {
         return genres.map((genre) => genre.name).join(", ");
-}
-
-// Get trailer video from videosList
-function parseTrailers(trailersList) {
-        console.log(trailersList);
-        for (const video of trailersList) {
-                // заменяем if (video.name === "Official Trailer")===============================================
-                if (video.name.includes("Official Trailer")) {
-                        return `${YOUTUBE_URL}${video.key}`;
-                }
-                else if (video.name.includes("Trailer")) {
-                        return `${YOUTUBE_URL}${video.key}`
-                }
-                else if (video.name) {
-                        return `${YOUTUBE_URL}${video.key}`
-                } 
-                        
-        }
 }
 
 async function openMovieDetailModal(e) {
@@ -87,7 +60,7 @@ async function openMovieDetailModal(e) {
 
         // Post req by id
         const filmInfo = await getMovieById(id);
-        // console.log(filmInfo);
+
         // Show modal
         refs.modalDetailOverlay.classList.toggle("is-hidden");
 
@@ -112,8 +85,6 @@ async function openMovieDetailModal(e) {
                 videos: { results: trailersList },
         } = filmInfo;
 
-        //  YouTube link to video trailer
-
         // Save temp object
         filmInfoParsed = {
                 id,
@@ -129,26 +100,8 @@ async function openMovieDetailModal(e) {
                 videos: { results: trailersList },
         };
 
-        // Film trailer
-        const trailer = parseTrailers(trailersList);
-        trailer && refs.youtubeLink.setAttribute("href", trailer);
-
-        // listeners for openTrailerBtn and backdrop=========================================================
-        refs.openTrailerBtn.addEventListener("click", openVideoTrailer);
-        refs.backdropTrailer.addEventListener("click", closeTrailerWindow);
-
-        // function that opens videoTrailer=================================================================
-        function openVideoTrailer() {
-
-                refs.backdropTrailer.classList.remove("unshown");
-                refs.backdropTrailer.firstElementChild.src = trailer;
-        }
-
-        // function that closes videoTrailer=================================================================
-        function closeTrailerWindow() {
-                refs.backdropTrailer.classList.add("unshown");
-                refs.backdropTrailer.firstElementChild.src = "";
-        }
+        // Init trailer of film
+        initTrailer(trailersList);
 
         // Parse names of genres
         const genresStr = genres.length > 0 ? parseGenres(genres) : "No genres";
@@ -181,9 +134,6 @@ async function openMovieDetailModal(e) {
 
         // Avg votes
         refs.votesAVG.innerText = vote_average ? vote_average.toFixed(1) : "0";
-
-        // YouTube link for video trailer============================================================
-        refs.backdropTrailer.firstElementChild.src = trailer;
 
         // Check statuses
         setButtonStatus("all", checkLibrary(id));
@@ -295,6 +245,9 @@ function closeModal(e) {
         // Deattach buttons events
         refs.watchBtn.removeEventListener("click", handleChangeStatus);
         refs.queueBtn.removeEventListener("click", handleChangeStatus);
+
+        // Deattach trailer
+        deattachTrailer();
 }
 
 // Fetch movie by ID

@@ -25,7 +25,7 @@ export function createMovieCard(movie, genreList) {
                 // backdrop_path,
                 poster_path,
                 title,
-                name,
+                // name,
                 // original_title,
                 genre_ids,
                 genres,
@@ -58,7 +58,6 @@ export function createMovieCard(movie, genreList) {
 
         // SCSS modifacator for blank image
         let imgBlank = "";
-
         // Poster image
         if (poster_path) {
                 posterImage += `${poster_path}`;
