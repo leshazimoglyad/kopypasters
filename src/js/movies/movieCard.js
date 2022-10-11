@@ -3,6 +3,7 @@ import { isHome } from "../init";
 
 // Blank image
 import blankImage from "../../images/no-image.svg";
+import { parseGenres } from "../modal/modal-film";
 
 // Get genres by IDs
 export function getGenresByID({ genres: genresList }, ids) {
@@ -27,6 +28,7 @@ export function createMovieCard(movie, genreList) {
                 name,
                 // original_title,
                 genre_ids,
+                genres,
                 release_date,
                 // rate,
                 vote_average,
@@ -34,12 +36,21 @@ export function createMovieCard(movie, genreList) {
                 // about,
         } = movie;
 
-        // Get genres by ID
-        let genres = getGenresByID(genreList, genre_ids);
+        // Get genres
+        let genresStr;
+
+        if (genre_ids) {
+                // Get genres by ID
+                genresStr = getGenresByID(genreList, genre_ids);
+        }
+        if (genres) {
+                // Join genres array to string
+                genresStr = parseGenres(genres);
+        }
 
         // Cuts long strings
-        genres = genres.length > 24 ? `${genres.slice(0, 24)}...` : genres;
-        let filmTitle = title || name;
+        genresStr = genresStr.length > 24 ? `${genresStr.slice(0, 24)}...` : genresStr;
+        let filmTitle = title;
         filmTitle = filmTitle.length > 24 ? `${filmTitle.slice(0, 24)}...` : filmTitle;
 
         // Preparing url, check posterImage on NULL
@@ -76,8 +87,8 @@ export function createMovieCard(movie, genreList) {
                                 </li>
                                 <li class="movies-section__item movies-section__add-info">
                                         <span class="movies-section__${
-                                                genres ? "genres" : "genres--no-info"
-                                        }">${genres || "No genres"}</span>
+                                                genresStr ? "genres" : "genres--no-info"
+                                        }">${genresStr || "No genres"}</span>
                                         <span>|</span>
                                         <span class="movies-section__${
                                                 date ? "year" : "year--no-info"

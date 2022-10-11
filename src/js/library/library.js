@@ -191,10 +191,10 @@ const watchedFilms = [
         },
 ];
 
-const queuedFilms = [];
+// const queuedFilms = [];
 
-localStorage.setItem("watchedFilms", JSON.stringify(watchedFilms));
-localStorage.setItem("queuedFilms", JSON.stringify(queuedFilms));
+// localStorage.setItem("watchedFilms", JSON.stringify(watchedFilms));
+// localStorage.setItem("queuedFilms", JSON.stringify(queuedFilms));
 
 // WATCHED
 function showWatchedFilms() {
@@ -216,11 +216,11 @@ function showWatchedFilms() {
         attachOnloadToCards(cards);
 }
 
-function getWatchedFromLocalStorage() {
+export function getWatchedFromLocalStorage() {
         try {
                 const savedFilms = localStorage.getItem("watchedFilms");
                 const parsedFilmsData = JSON.parse(savedFilms);
-                console.log(parsedFilmsData);
+                // console.log(parsedFilmsData);
                 return parsedFilmsData;
         } catch (e) {
                 console.log(e);
@@ -282,11 +282,11 @@ function showQueuedFilms() {
         refs.gallery.insertAdjacentHTML("beforeend", markup);
 }
 
-function getQueuedFromLocalStorage() {
+export function getQueuedFromLocalStorage() {
         try {
                 const savedFilms = localStorage.getItem("queuedFilms");
                 const parsedFilmsData = JSON.parse(savedFilms);
-                console.log(parsedFilmsData);
+                // console.log(parsedFilmsData);
                 return parsedFilmsData;
         } catch (e) {
                 console.log(e);
