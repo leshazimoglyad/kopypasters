@@ -2,11 +2,25 @@ import { loadingSpinnerToggle } from "../interface/spinner";
 import { fetchMovieDetailsById } from "../services/fetch";
 import { scrollableBody } from "../helpers";
 
+
 // changed  'watch?v=' to 'embed' ===============================================
 const YOUTUBE_URL = "https://www.youtube.com/embed/";
+const WATCHED_STORE = "watchedFilms";
+const QUEUED_STORE = "queuedFilms";
+
+let id;
+let filmInfoParsed;
+
 
 // Blank image
 import blankImage from "../../images/no-image.svg";
+import {
+        appendToStorage,
+        loadFromStorage,
+        removeKeyFromStorage,
+        saveToStorage,
+} from "../services/storage";
+import { getQueuedFromLocalStorage, getWatchedFromLocalStorage } from "../library/library";
 
 // References to elements
 const refs = {
@@ -22,6 +36,7 @@ const refs = {
         genres: document.querySelector(".modal-detail__genres"),
         article: document.querySelector(".modal-detail__article"),
         youtubeLink: document.querySelector(".modal-detail__youtube-link"),
+
         
         watchedBtn: document.querySelector(".modal-detail__btn--watched"),
         queueBtn: document.querySelector(".modal-detail__btn--queue"),
@@ -30,17 +45,16 @@ const refs = {
         // get references from DOM ===========================================================================
         openTrailerBtn: document.querySelector('[data-action="openTrailerVideo"]'),
         backdropTrailer: document.querySelector('.backdrop_trailer'),
+
 };
 
 // Init attaching
 export default function initModalFilmDetails() {
-        refs.grid.addEventListener("click", openModalWindow);
-        // refs.closeBtn.addEventListener("click", closeModal);
-        refs.modalDetailOverlay.addEventListener("click", closeModal);
+        refs.grid.addEventListener("click", openMovieDetailModal);
 }
 
 // Join genres array to string
-function parseGenres(genres) {
+export function parseGenres(genres) {
         return genres.map((genre) => genre.name).join(", ");
 }
 
@@ -53,11 +67,11 @@ function parseTrailers(trailersList) {
         }
 }
 
-async function openModalWindow(e) {
+async function openMovieDetailModal(e) {
         const filmCard = e.target;
 
         // Get video ID from data card
-        const id = filmCard.closest("div").getAttribute("data-id");
+        id = filmCard.closest("div").getAttribute("data-id");
 
         // Return if no id
         if (!id) {
@@ -69,10 +83,13 @@ async function openModalWindow(e) {
 
         // Post req by id
         const filmInfo = await getMovieById(id);
-        console.log(filmInfo);
-
+        // console.log(filmInfo);
         // Show modal
         refs.modalDetailOverlay.classList.toggle("is-hidden");
+
+        // Attach clicks event on Modal (for close window)
+        refs.modalDetailOverlay.addEventListener("click", closeModal);
+        document.addEventListener("keydown", closeModal);
 
         // Hide scroll on body
         scrollableBody(false);
@@ -83,6 +100,7 @@ async function openModalWindow(e) {
                 original_title = "No original title",
                 overview = "No overview...",
                 popularity,
+                release_date,
                 vote_average,
                 vote_count,
                 poster_path,
@@ -90,7 +108,26 @@ async function openModalWindow(e) {
                 videos: { results: trailersList },
         } = filmInfo;
 
+
         //  YouTube link to video trailer 
+
+        // Save temp object
+        filmInfoParsed = {
+                id,
+                title,
+                original_title,
+                overview,
+                popularity,
+                release_date,
+                genres,
+                vote_average,
+                vote_count,
+                poster_path,
+                videos: { results: trailersList },
+        };
+
+        // Film trailer
+
         const trailer = parseTrailers(trailersList);
         
         
@@ -145,6 +182,7 @@ async function openModalWindow(e) {
         // Avg votes
         refs.votesAVG.innerText = vote_average ? vote_average.toFixed(1) : "0";
 
+
         // YouTube link for video trailer============================================================
         refs.backdropTrailer.firstElementChild.src = trailer;
         
@@ -153,55 +191,118 @@ async function openModalWindow(e) {
         // const queue = refs.queueBtn.getAttribute("data-status");
 
        
+
+
         // Check statuses
-        // checkStatuses(watched, queue);
+        setButtonStatus("all", checkLibrary(id));
 
-        // refs.watchedBtn.addEventListener("click", handleWatched);
-        // refs.queueBtn.addEventListener("click", handleQueue);
+        // Attach click events on buttons
+        refs.watchBtn.addEventListener("click", handleChangeStatus);
+        refs.queueBtn.addEventListener("click", handleChangeStatus);
 }
 
-function handleWatched() {
-        // Читаємо локалстор
-        // Шукаємо айді
-        // якщо є - видаляємо з стору, прибираємо клас з кнопки, прибираємо датаатр.
-}
+// On click buttons events
+const handleChangeStatus = (e) => {
+        const { watched, queued } = checkLibrary(id);
 
-function handleQueue() {}
+        // Watched button
+        if (e.target.id == "watch-btn") {
+                if (watched.bool) {
+                        removeKeyFromStorage(WATCHED_STORE, watched.index);
+                } else {
+                        appendToStorage(WATCHED_STORE, filmInfoParsed);
+                }
+                setButtonStatus("watch-btn", { watched, queued });
+        }
+
+        // Queued button
+        if (e.target.id == "queue-btn") {
+                if (queued.bool) {
+                        removeKeyFromStorage(QUEUED_STORE, queued.index);
+                } else {
+                        appendToStorage(QUEUED_STORE, filmInfoParsed);
+                }
+                setButtonStatus("queue-btn", { watched, queued });
+        }
+};
+
+// Change style of buttons
+function setButtonStatus(btn, { watched, queued }) {
+        switch (btn) {
+                case "watch-btn":
+                        refs.watchBtn.innerText = watched.bool ? "Add to Watched" : "Unwatched";
+                        break;
+                case "queue-btn":
+                        refs.queueBtn.innerText = queued.bool ? "Add to Queue" : "Unqueued";
+                        break;
+                default:
+                        refs.watchBtn.innerText = !watched.bool ? "Add to Watched" : "Unwatched";
+                        refs.queueBtn.innerText = !queued.bool ? "Add to Queue" : "Unqueued";
+                        break;
+        }
+}
 
 // Checking statuses
-// function checkStatuses(watched, queue) {
-//         if (watched == "watched") {
-//                 refs.watchedBtn.classList.add("watched");
-//                 refs.watchedBtn.innerText = "Remove from Watched";
-//         } else {
-//                 refs.watchedBtn.classList.remove("watched");
-//                 refs.watchedBtn.innerText = "Add to Watched";
-//         }
+function checkLibrary(id) {
+        let watchedFilms = getWatchedFromLocalStorage(WATCHED_STORE);
+        let queuedFilms = getQueuedFromLocalStorage(QUEUED_STORE);
 
-//         if (queue == "in-queue") {
-//                 refs.queueBtn.classList.add("in-queue");
-//                 refs.queueBtn.innerText = "Remove from Queue";
-//         } else {
-//                 refs.queueBtn.classList.remove("in-queue");
-//                 refs.queueBtn.innerText = "Add to Queue";
-//         }
-// }
+        if (watchedFilms === null || watchedFilms === undefined) {
+                saveToStorage(WATCHED_STORE, []);
+                watchedFilms = [];
+        }
+
+        if (queuedFilms === null || queuedFilms === undefined) {
+                saveToStorage(QUEUED_STORE, []);
+                queuedFilms = [];
+        }
+
+        let indexWatched = watchedFilms.findIndex((film) => film.id == id);
+        let indexQueued = queuedFilms.findIndex((queued) => queued.id == id);
+
+        const isWatched = Boolean(indexWatched + 1);
+        const isQueued = Boolean(indexQueued + 1);
+
+        return {
+                watched: { bool: isWatched, index: indexWatched },
+                queued: { bool: isQueued, index: indexQueued },
+        };
+}
 
 // Close modal
 function closeModal(e) {
-        // Closest parent is "button" and class is "backdrop"
-        if (!e.target.closest("button") && !e.target.classList.contains("backdrop")) {
-                return;
+        // Keyboard event
+        if (e.type === "keydown") {
+                // Not escape
+                if (e.keyCode !== 27) {
+                        return;
+                }
         }
 
-        // Not close buttons
-        if (e.target.classList.contains("modal-detail__btn")) return;
+        // Mouse event
+        else {
+                // Closest parent is "button" and class is "backdrop"
+                if (!e.target.closest("button") && !e.target.classList.contains("backdrop")) {
+                        return;
+                }
+
+                // Not close buttons
+                if (e.target.classList.contains("modal-detail__btn")) return;
+        }
 
         // Toggle hidden class
         refs.modalDetailOverlay.classList.toggle("is-hidden");
 
         // Show scroll on body
         scrollableBody(true);
+
+        // Deattach keyboard and mouse events
+        refs.modalDetailOverlay.removeEventListener("click", closeModal);
+        document.removeEventListener("keydown", closeModal);
+
+        // Deattach buttons events
+        refs.watchBtn.removeEventListener("click", handleChangeStatus);
+        refs.queueBtn.removeEventListener("click", handleChangeStatus);
 }
 
 // Fetch movie by ID
