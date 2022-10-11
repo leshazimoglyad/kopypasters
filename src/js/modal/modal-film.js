@@ -1,9 +1,13 @@
 import { loadingSpinnerToggle } from "../interface/spinner";
-import { fetchMovieById } from "../services/fetch";
+import { fetchMovieDetailsById } from "../services/fetch";
+import { scrollableBody } from "../helpers";
+
+const YOUTUBE_URL = "https://www.youtube.com/watch?v=";
 
 // Blank image
 import blankImage from "../../images/no-image.svg";
 
+// References to elements
 const refs = {
         grid: document.querySelector(".movies-section__grid"),
         modalDetailOverlay: document.querySelector(".backdrop"),
@@ -16,18 +20,31 @@ const refs = {
         orgTitle: document.querySelector(".modal-detail__org-title"),
         genres: document.querySelector(".modal-detail__genres"),
         article: document.querySelector(".modal-detail__article"),
+        youtubeLink: document.querySelector(".modal-detail__youtube-link"),
 
         watchedBtn: document.querySelector(".modal-detail__btn--watched"),
         queueBtn: document.querySelector(".modal-detail__btn--queue"),
 };
 
+// Init attaching
 export default function initModalFilmDetails() {
         refs.grid.addEventListener("click", openModalWindow);
-        refs.closeBtn.addEventListener("click", closeModal);
+        // refs.closeBtn.addEventListener("click", closeModal);
+        refs.modalDetailOverlay.addEventListener("click", closeModal);
 }
 
+// Join genres array to string
 function parseGenres(genres) {
         return genres.map((genre) => genre.name).join(", ");
+}
+
+// Get trailer video from videosList
+function parseTrailers(trailersList) {
+        for (const video of trailersList) {
+                if (video.name === "Official Trailer") {
+                        return `${YOUTUBE_URL}${video.key}`;
+                }
+        }
 }
 
 async function openModalWindow(e) {
@@ -41,29 +58,42 @@ async function openModalWindow(e) {
                 return;
         }
 
+        // Clear image for first
+        refs.posterImage.setAttribute("src", blankImage);
+
         // Post req by id
         const filmInfo = await getMovieById(id);
+        console.log(filmInfo);
 
         // Show modal
         refs.modalDetailOverlay.classList.toggle("is-hidden");
+
+        // Hide scroll on body
+        scrollableBody(false);
 
         // Export data
         const {
                 title = "NO TITLE",
                 original_title = "No original title",
                 overview = "No overview...",
-                popularity = 0,
-                vote_average = 0,
-                vote_count = 0,
+                popularity,
+                vote_average,
+                vote_count,
                 poster_path,
                 genres,
+                videos: { results: trailersList },
         } = filmInfo;
 
-        // Parse names of genres        
-        const genresStr = (genres.length > 0) ? parseGenres(genres) : "No genres";
+        // Film trailer
+        const trailer = parseTrailers(trailersList);
+        trailer && refs.youtubeLink.setAttribute("href", trailer);
+
+        // Parse names of genres
+        const genresStr = genres.length > 0 ? parseGenres(genres) : "No genres";
 
         // Title
         refs.title.innerText = title;
+
         // Poster image
         poster_path
                 ? refs.posterImage.setAttribute(
@@ -73,26 +103,31 @@ async function openModalWindow(e) {
                 : refs.posterImage.setAttribute("src", blankImage);
 
         // Original title
-        refs.orgTitle.innerText = original_title;
-        // Popularity
-        refs.popularity.innerText = popularity.toFixed(2);
-        // Genres
-        refs.genres.innerText = genresStr;
-        // Overview
-        refs.article.innerText = overview;
-        // Votes
-        refs.votesCount.innerText = vote_count;
-        // Avg votes
-        refs.votesAVG.innerText = vote_average.toFixed(1);
+        refs.orgTitle.innerText = original_title || "NO TITLE";
 
-        const watched = refs.watchedBtn.getAttribute("data-status");
-        const queue = refs.queueBtn.getAttribute("data-status");
+        // Popularity
+        refs.popularity.innerText = popularity ? popularity.toFixed(2) : "No info";
+
+        // Genres
+        refs.genres.innerText = genresStr || "No info";
+
+        // Overview
+        refs.article.innerText = overview || "No info";
+
+        // Votes
+        refs.votesCount.innerText = vote_count || "0";
+
+        // Avg votes
+        refs.votesAVG.innerText = vote_average ? vote_average.toFixed(1) : "0";
+
+        // const watched = refs.watchedBtn.getAttribute("data-status");
+        // const queue = refs.queueBtn.getAttribute("data-status");
 
         // Check statuses
-        checkStatuses(watched, queue);
+        // checkStatuses(watched, queue);
 
-        refs.watchedBtn.addEventListener("click", handleWatched);
-        refs.queueBtn.addEventListener("click", handleQueue);
+        // refs.watchedBtn.addEventListener("click", handleWatched);
+        // refs.queueBtn.addEventListener("click", handleQueue);
 }
 
 function handleWatched() {
@@ -104,27 +139,39 @@ function handleWatched() {
 function handleQueue() {}
 
 // Checking statuses
-function checkStatuses(watched, queue) {
-        if (watched == "watched") {
-                refs.watchedBtn.classList.add("watched");
-                refs.watchedBtn.innerText = "Remove from Watched";
-        } else {
-                refs.watchedBtn.classList.remove("watched");
-                refs.watchedBtn.innerText = "Add to Watched";
-        }
+// function checkStatuses(watched, queue) {
+//         if (watched == "watched") {
+//                 refs.watchedBtn.classList.add("watched");
+//                 refs.watchedBtn.innerText = "Remove from Watched";
+//         } else {
+//                 refs.watchedBtn.classList.remove("watched");
+//                 refs.watchedBtn.innerText = "Add to Watched";
+//         }
 
-        if (queue == "in-queue") {
-                refs.queueBtn.classList.add("in-queue");
-                refs.queueBtn.innerText = "Remove from Queue";
-        } else {
-                refs.queueBtn.classList.remove("in-queue");
-                refs.queueBtn.innerText = "Add to Queue";
-        }
-}
+//         if (queue == "in-queue") {
+//                 refs.queueBtn.classList.add("in-queue");
+//                 refs.queueBtn.innerText = "Remove from Queue";
+//         } else {
+//                 refs.queueBtn.classList.remove("in-queue");
+//                 refs.queueBtn.innerText = "Add to Queue";
+//         }
+// }
 
 // Close modal
-function closeModal() {
+function closeModal(e) {
+        // Closest parent is "button" and class is "backdrop"
+        if (!e.target.closest("button") && !e.target.classList.contains("backdrop")) {
+                return;
+        }
+
+        // Not close buttons
+        if (e.target.classList.contains("modal-detail__btn")) return;
+
+        // Toggle hidden class
         refs.modalDetailOverlay.classList.toggle("is-hidden");
+
+        // Show scroll on body
+        scrollableBody(true);
 }
 
 // Fetch movie by ID
@@ -135,7 +182,7 @@ async function getMovieById(id) {
                 await new Promise((resolve) => setTimeout(resolve, 300));
 
                 // Send http req, trying get the pictures
-                const response = await fetchMovieById(id);
+                const response = await fetchMovieDetailsById(id);
 
                 // Check statuses
                 if (response.status !== 200) {

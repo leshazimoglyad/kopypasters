@@ -48,6 +48,7 @@ export const fetchMovie = async ({ keyword, page }) => {
         return axios.get(`${url}?${param.toString()}`);
 };
 
+// Get all genres list
 export const fetchGenres = async () => {
         // Get base URL
         let url = URL;
@@ -62,27 +63,16 @@ export const fetchGenres = async () => {
         return axios.get(`${url}?${param.toString()}`);
 };
 
-
-export const fetchMovieById = async (id) => {
+// Get movie info by id
+export const fetchMovieDetailsById = async (id) => {
         let url = URL;
 
         const param = new URLSearchParams({
                 api_key: API_KEY,
+                append_to_response: 'videos', //,images
         });
 
         const urlId = `movie/${id}`;
         
         return axios.get(`${url}${urlId}?${param.toString()}`);
-};
-
-// ф-я запроса видео-трейлера на филь по id
-export const fetchTrailerMovieById = async (id) => {
-        let url = URL;
-
-        const param = new URLSearchParams({
-                api_key: API_KEY,
-        });
-        const urlVideoById = `movie/${id}/videos`
-
-        return axios.get(`${url}${urlVideoById}?${param.toString()}`);
 };

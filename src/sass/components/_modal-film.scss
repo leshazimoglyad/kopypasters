@@ -24,7 +24,7 @@
     flex-direction: column;
     gap: 20px;
 
-    max-height: calc(100vh - 20px);
+    max-height: calc(100vh - 100px);
     overflow-y: auto;
 
     @include mq("tablet") {
@@ -51,7 +51,34 @@
         cursor: pointer;
     }
 
+    &__close-icon {
+        stroke: #000;
+    }
+
+    &__close-icon:hover {
+        stroke: #ff6b01;
+    }
+
+    &__youtube-link {
+        position: absolute;
+        left: 5px;
+        cursor: pointer;
+    }
+
+    &__youtube-icon {
+        display: inline-block;
+        width: 50px;
+        height: 50px;
+        stroke-width: 0;
+        fill: #fff;
+    }
+
+    &__youtube-icon:hover {
+        fill: #f00;
+    }
+
     &__poster {
+        position: relative;
     }
 
     &__image {
@@ -67,6 +94,7 @@
     }
 
     &__info {
+        flex-grow: 1;
         height: 100%;
     }
 
@@ -86,8 +114,8 @@
         padding-bottom: 8px;
     }
 
-    &__col2 {
-    }
+    // &__col2 {
+    // }
 
     &__vote-avg {
         background-color: #ff6b08;
@@ -110,36 +138,35 @@
     &__buttons-wrapper {
         display: flex;
         gap: 20px;
-        justify-content: center;        
+        justify-content: center;
     }
 
     &__btn {
         height: 44px;
         border-radius: 5px;
+
         @include fonts(12px, 16px, 500, inherit);
         text-transform: uppercase;
-        cursor: pointer;
-    }
-
-    &__btn--watched {
-        border: 0;
-        background: #ff6b01;
-        color: #ffffff;
-    }
-
-    &__btn--queue {
         background: #fff;
         border: 1px solid #000000;
         color: #000;
+        cursor: pointer;
+
+        @include mq("tablet") {
+            padding: 15px;
+        }
     }
 
-    .watched {
-        background: #ff7b7b;
+    &__btn:hover {
+        border: 0;
+        background: #ff6b01;
+        border: 1px solid #ff6b01;
+        color: #ffffff;
     }
 
-    .in-queue {
-        background: #5bc3ff;
-    }
+    // .watched {
+    // }
 
+    // .in-queue {
+    // }
 }
-

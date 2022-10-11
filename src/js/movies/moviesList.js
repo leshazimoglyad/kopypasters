@@ -1,7 +1,8 @@
 import { getRndInteger } from "../helpers/index.js";
 import { loadFromStorage } from "../services/storage.js";
-import { createMovieCard, arrowNext } from "./movieCard";
+import { createMovieCard } from "./movieCard";
 import { nextPage } from "../pagination/util";
+import { nextCard } from "./nextCard";
 
 // Clear gallery
 function clearGallery() {
@@ -31,10 +32,7 @@ function renderMoviesList(dataJSON) {
         gallery.insertAdjacentHTML("beforeend", moviesCards);
 
         //Add next card
-        gallery.insertAdjacentHTML("beforeend", arrowNext);
-
-        const nextBtn = document.querySelector(".movie__container");
-        nextBtn.addEventListener("click", nextPage);
+        initNextCard(gallery);
 
         // Get all cards
         const cards = gallery.querySelectorAll(".movies-section__card");
@@ -43,19 +41,30 @@ function renderMoviesList(dataJSON) {
         attachOnloadToCards(cards);
 }
 
+// Next card
+function initNextCard(gallery) {
+        // Insert markup of card to gallery
+        gallery.insertAdjacentHTML("beforeend", nextCard);
+        
+        // Looking for element
+        const nextBtn = document.querySelector(".next-card__container");
+
+        // Attach listener
+        nextBtn.addEventListener("click", nextPage);
+}
+
 // Add events on pictures and checking downloading complete
 export function attachOnloadToCards(cards) {
         cards.forEach((card) => {
                 // Get link and img refs
                 const img = card.firstElementChild;
 
-                // console.log(img);
-                // If pic is loaded - remove skelet effect and add loaded mark on img
+                // Faid in effect
                 img.onload = () => {
                         // Added random showing delay
                         setTimeout(() => {
                                 img.classList.add("loaded");
-                        }, getRndInteger(400, 1000));
+                        }, getRndInteger(200, 500));
                 };
         });
 }
