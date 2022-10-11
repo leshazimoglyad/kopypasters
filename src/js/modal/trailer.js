@@ -41,9 +41,18 @@ function closeTrailerWindow() {
 
 // Get trailer video from videosList
 function parseTrailers(trailersList) {
-    for (const video of trailersList) {            
-             if (video.name.includes("Official Trailer")) {
+    for (const video of trailersList) {
+            // заменяем if (video.name === "Official Trailer")===============================================
+            if (video.name.includes("Official Trailer")) {
                     return `${YOUTUBE_URL}${video.key}`;
             }
+            else if (video.name.includes("Trailer")) {
+                    return `${YOUTUBE_URL}${video.key}`
+            }
+            else if (video.name) {
+                    return `${YOUTUBE_URL}${video.key}`
+            } 
+                    
     }
 }
+
