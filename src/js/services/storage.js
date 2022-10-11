@@ -1,3 +1,4 @@
+// Save to storage
 const saveToStorage = (key, value) => {
         try {
                 const serializedState = JSON.stringify(value);
@@ -7,6 +8,7 @@ const saveToStorage = (key, value) => {
         }
 };
 
+// Load from storage
 const loadFromStorage = (key) => {
         try {
                 const serializedState = localStorage.getItem(key);
@@ -16,6 +18,7 @@ const loadFromStorage = (key) => {
         }
 };
 
+// Remove item from storage
 const removeFromStorage = (key) => {
         try {
                 localStorage.removeItem(key);
@@ -24,6 +27,7 @@ const removeFromStorage = (key) => {
         }
 };
 
+// Append key
 function appendToStorage(key, data) {
         try {
                 const newData = loadFromStorage(key);
@@ -35,6 +39,7 @@ function appendToStorage(key, data) {
         }
 }
 
+// Remove key from storage
 function removeKeyFromStorage(key, index) {
         try {
                 const newData = loadFromStorage(key);
