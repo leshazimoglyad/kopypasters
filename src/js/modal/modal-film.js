@@ -159,47 +159,41 @@ async function openMovieDetailModal(e) {
 
 // On click buttons events
 const handleChangeStatus = (e) => {
-        const { isWatched, isQueued } = checkLibrary(id);
+        const { watched, queued } = checkLibrary(id);
 
         // Watched button
         if (e.target.id == "watch-btn") {
-                if (isWatched !== -1) {
-                        removeKeyFromStorage(WATCHED_STORE, isWatched);
-                        setButtonStatus("watch-btn", false);
+                if (watched.bool) {
+                        removeKeyFromStorage(WATCHED_STORE, watched.index);
                 } else {
                         appendToStorage(WATCHED_STORE, filmInfoParsed);
-                        setButtonStatus("watch-btn", true);
                 }
+                setButtonStatus("watch-btn", { watched, queued });
         }
 
         // Queued button
         if (e.target.id == "queue-btn") {
-                if (isQueued !== -1) {
-                        removeKeyFromStorage(WATCHED_STORE, isQueued);
-                        setButtonStatus("queue-btn", true);
+                if (queued.bool) {
+                        removeKeyFromStorage(QUEUED_STORE, queued.index);
                 } else {
                         appendToStorage(QUEUED_STORE, filmInfoParsed);
-                        setButtonStatus("queue-btn", false);
                 }
+                setButtonStatus("queue-btn", { watched, queued });
         }
 };
 
 // Change style of buttons
-function setButtonStatus(btn, status) {
-        console.log(btn);
+function setButtonStatus(btn, { watched, queued }) {
         switch (btn) {
                 case "watch-btn":
-                        console.log("WW");
-                        refs.watchBtn.innerText = !status ? "Add to Watched" : "Unwatched";
+                        refs.watchBtn.innerText = watched.bool ? "Add to Watched" : "Unwatched";
                         break;
                 case "queue-btn":
-                        console.log("Q");
-                        refs.queueBtn.innerText = !status ? "Add to Queue" : "Unqueued";
+                        refs.queueBtn.innerText = queued.bool ? "Add to Queue" : "Unqueued";
                         break;
                 default:
-                        console.log("ALLL");
-                        refs.watchBtn.innerText = !status ? "Add to Watched" : "Unwatched";
-                        refs.queueBtn.innerText = !status ? "Add to Queue" : "Unqueued";
+                        refs.watchBtn.innerText = !watched.bool ? "Add to Watched" : "Unwatched";
+                        refs.queueBtn.innerText = !queued.bool ? "Add to Queue" : "Unqueued";
                         break;
         }
 }
@@ -219,20 +213,16 @@ function checkLibrary(id) {
                 queuedFilms = [];
         }
 
-        let isWatched = -1;
-        let isQueued = -1;
+        let indexWatched = watchedFilms.findIndex((film) => film.id == id);
+        let indexQueued = queuedFilms.findIndex((queued) => queued.id == id);
 
-        if (watchedFilms.length > 0) {
-                console.log("1");
-                isWatched = watchedFilms.findIndex((film) => film.id == id);
-        }
+        const isWatched = Boolean(indexWatched + 1);
+        const isQueued = Boolean(indexQueued + 1);
 
-        if (queuedFilms.length > 0) {
-                console.log("2");
-                isQueued = queuedFilms.findIndex((queued) => queued.id == id);
-        }
-
-        return { isWatched, isQueued };
+        return {
+                watched: { bool: isWatched, index: indexWatched },
+                queued: { bool: isQueued, index: indexQueued },
+        };
 }
 
 // Close modal
