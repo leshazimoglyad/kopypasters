@@ -123,10 +123,10 @@ async function openModalWindow(e) {
         const queue = refs.queueBtn.getAttribute("data-status");
 
         // Check statuses
-        checkStatuses(watched, queue);
+        // checkStatuses(watched, queue);
 
-        refs.watchedBtn.addEventListener("click", handleWatched);
-        refs.queueBtn.addEventListener("click", handleQueue);
+        // refs.watchedBtn.addEventListener("click", handleWatched);
+        // refs.queueBtn.addEventListener("click", handleQueue);
 }
 
 function handleWatched() {
@@ -138,23 +138,23 @@ function handleWatched() {
 function handleQueue() {}
 
 // Checking statuses
-function checkStatuses(watched, queue) {
-        if (watched == "watched") {
-                refs.watchedBtn.classList.add("watched");
-                refs.watchedBtn.innerText = "Remove from Watched";
-        } else {
-                refs.watchedBtn.classList.remove("watched");
-                refs.watchedBtn.innerText = "Add to Watched";
-        }
+// function checkStatuses(watched, queue) {
+//         if (watched == "watched") {
+//                 refs.watchedBtn.classList.add("watched");
+//                 refs.watchedBtn.innerText = "Remove from Watched";
+//         } else {
+//                 refs.watchedBtn.classList.remove("watched");
+//                 refs.watchedBtn.innerText = "Add to Watched";
+//         }
 
-        if (queue == "in-queue") {
-                refs.queueBtn.classList.add("in-queue");
-                refs.queueBtn.innerText = "Remove from Queue";
-        } else {
-                refs.queueBtn.classList.remove("in-queue");
-                refs.queueBtn.innerText = "Add to Queue";
-        }
-}
+//         if (queue == "in-queue") {
+//                 refs.queueBtn.classList.add("in-queue");
+//                 refs.queueBtn.innerText = "Remove from Queue";
+//         } else {
+//                 refs.queueBtn.classList.remove("in-queue");
+//                 refs.queueBtn.innerText = "Add to Queue";
+//         }
+// }
 
 // Close modal
 function closeModal() {
