@@ -100,6 +100,7 @@ async function openMovieDetailModal(e) {
                 videos: { results: trailersList },
         };
 
+        // Init trailer of film
         initTrailer(trailersList);
 
         // Parse names of genres
