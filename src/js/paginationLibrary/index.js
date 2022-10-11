@@ -1,1 +1,1 @@
-import { initPagination, clearPaginationLibrary } from "../paginationLibrary/index";
+import PaginationLibrary from "./paginationLibrary";

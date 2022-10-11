@@ -18,12 +18,10 @@
 }
 
 .theme-toggle__icon-sun {
-
     display: none;
 }
 
 .theme-toggle__icon-moon {
-
     display: block;
 }
 
@@ -67,10 +65,12 @@ body.dark-theme {
 
     & .modal-detail__about-label {
         color: #fff;
-
     }
 
     & .modal-detail__article {
+        color: #fff;
+    }
+    & .movies-section__message {
         color: #fff;
     }
 }

@@ -25,6 +25,7 @@ export function createMovieCard(movie, genreList) {
                 // backdrop_path,
                 poster_path,
                 title,
+                name,
                 // original_title,
                 genre_ids,
                 genres,
