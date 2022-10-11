@@ -1,8 +1,9 @@
 //Modal Film
-import "./modal-film"
+import "./modal-film";
 
 //trailer_window
-import "./trailer_window"
+import "./trailer_window";
 
 //Footer modal
-import "./modal-footer"
+import "./modal-footer";
+import "./modalFootertTeam";
