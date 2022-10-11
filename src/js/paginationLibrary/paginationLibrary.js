@@ -151,6 +151,7 @@ export default class PaginationLibrary {
                 // console.log("totalElements", totalElements);
                 // console.log("PerPage", perPage);
                 const totalOfBtn = Math.ceil(this.totalElements / this.perPage);
+                this.currentPage = this.currentPage > totalOfBtn ? totalOfBtn : this.currentPage;
                 // console.log(totalOfBtn);
                 const countBtnInPagination = Math.min(totalOfBtn, this.btnInPagination);
                 if (totalOfBtn > 1) {
