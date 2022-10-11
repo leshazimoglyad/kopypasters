@@ -1,7 +1,7 @@
 import { getMovieByName_deb, getGenres } from "./movies";
 import initModalFilmDetails from "./modal/modal-film";
 import initHeaderSearchForm from "./header/header";
-
+import { handleAddToQueueBtn, handleAddToWatchedBtn, initLibrary } from "./library/library";
 export let isHome;
 
 // Wait the DOM is loaded
@@ -18,5 +18,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 getGenres();
                 getMovieByName_deb({ pagination: true });
+                return;
+        } else {
+                initLibrary();
         }
 });

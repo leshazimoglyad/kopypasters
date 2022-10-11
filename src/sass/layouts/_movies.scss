@@ -27,6 +27,9 @@
         object-fit: cover;
         height: 455px;
 
+        box-shadow: rgb(0 0 0 / 7%) 0px 1px 2px, rgb(0 0 0 / 7%) 0px 2px 4px, rgb(0 0 0 / 7%) 0px 4px 8px,
+            rgb(0 0 0 / 7%) 0px 8px 16px, rgb(0 0 0 / 7%) 0px 16px 32px, rgb(0 0 0 / 7%) 0px 32px 64px;
+
         &:hover,
         &:focus {
             transform: scale(1.01);
@@ -85,6 +88,59 @@
         color: #ffffff;
         background-color: #ff6b01;
         border-radius: 4px;
+    }
+
+    // Loading spinner
+    &__loading-spinner {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        // height: calc(100vh - 350px);
+        padding-bottom: 60px;
+    }
+    &__text {
+        margin: 8px auto;
+        color: $color-primary;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-weight: 600;
+        // font-family: $font;
+    }
+
+    &__message {
+        text-align: center;
+        margin-top: auto;
+        color: $color-primary;
+        letter-spacing: 1px;
+        font-weight: 500;
+
+        &--bold {
+            font-weight: 600;
+        }
+    }
+    &__filmstrip {
+        position: relative;
+        overflow: hidden;
+        width: 56px;
+        height: 70px;
+        background: $color-primary;
+        box-shadow: rgb(0 0 0 / 24%) 0px 3px 8px;
+        z-index: -1;
+        &:before,
+        &:after {
+            content: "";
+            position: absolute;
+            height: 120%;
+            border-left: 5px dashed $color-secondary;
+            animation: roll 200ms infinite;
+        }
+        &:before {
+            left: 5px;
+        }
+        &:after {
+            right: 5px;
+        }
     }
 
     // TABLET

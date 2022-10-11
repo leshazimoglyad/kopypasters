@@ -44,7 +44,7 @@ function renderMoviesList(dataJSON) {
 }
 
 // Add events on pictures and checking downloading complete
-function attachOnloadToCards(cards) {
+export function attachOnloadToCards(cards) {
         cards.forEach((card) => {
                 // Get link and img refs
                 const img = card.firstElementChild;
@@ -55,7 +55,7 @@ function attachOnloadToCards(cards) {
                         // Added random showing delay
                         setTimeout(() => {
                                 img.classList.add("loaded");
-                        }, getRndInteger(400, 1000));
+                        }, getRndInteger(200, 500));
                 };
         });
 }

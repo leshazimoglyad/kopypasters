@@ -4,15 +4,12 @@ $color-secondary: #f5f1ed;
 // Loading spinner
 .spinner {
     position: fixed;
-    z-index: 10;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.2);
-
     z-index: 1;
-
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -20,6 +17,18 @@ $color-secondary: #f5f1ed;
 
     // height: calc(100vh - 350px);
     // padding-bottom: 60px;
+
+    &::before {
+        content: "";
+        z-index: -1;
+        width: 104px;
+        height: 111px;
+        background-color: #fff;
+        display: block;
+        position: absolute;
+        border-radius: 25px;
+        box-shadow: rgb(0 0 0 / 16%) 0px 10px 36px 0px, rgb(0 0 0 / 6%) 0px 0px 0px 1px;
+    }
 
     &__text {
         margin: 8px auto;
@@ -29,6 +38,7 @@ $color-secondary: #f5f1ed;
         font-weight: 600;
         // font-family: $font;
     }
+
     &__filmstrip {
         position: relative;
         overflow: hidden;

@@ -1,38 +1,55 @@
 import { loadingSpinnerToggle } from "../interface/spinner";
-import { getGenresByID } from "../movies/movieCard";
 import { fetchMovieById, fetchTrailerMovieById } from "../services/fetch";
-import { loadFromStorage } from "../services/storage";
+
+// Blank image
+import blankImage from "../../images/no-image.svg";
 
 // импорт
 
 
 
 const refs = {
-        modalWindow: document.querySelector(".backdrop"),
-        // openTrailerMovieBtn: document.querySelector(".btn_watch-trailer"),
-        closeBtn: document.querySelector(".close_btn"),
-        openBtn: document.querySelector(".movies-section__grid"),
-        modalTitle: document.querySelector(".modal_title"),
-        votesValue: document.querySelector(".votes-value"),
-        popularityValue: document.querySelector(".popularity-value"),
-        originalTitleValue: document.querySelector(".original-title-value"),
-        modal: document.querySelector(".modal"),
+        grid: document.querySelector(".movies-section__grid"),
+        modalDetailOverlay: document.querySelector(".backdrop"),
+        closeBtn: document.querySelector(".modal-detail__close-button"),
+        posterImage: document.querySelector(".modal-detail__image"),
+        title: document.querySelector(".modal-detail__title"),
+        votesAVG: document.querySelector(".modal-detail__vote-avg"),
+        votesCount: document.querySelector(".modal-detail__vote-count"),
+        popularity: document.querySelector(".modal-detail__popularity"),
+        orgTitle: document.querySelector(".modal-detail__org-title"),
+        genres: document.querySelector(".modal-detail__genres"),
+        article: document.querySelector(".modal-detail__article"),
+
+        watchedBtn: document.querySelector(".modal-detail__btn--watched"),
+        queueBtn: document.querySelector(".modal-detail__btn--queue"),
 };
 
 
 export default function initModalFilmDetails() {
-        refs.openBtn.addEventListener("click", openModalWindow);
+        refs.grid.addEventListener("click", openModalWindow);
         refs.closeBtn.addEventListener("click", closeModal);
+}
+
+function parseGenres(genres) {
+        return genres.map((genre) => genre.name).join(", ");
 }
 
 async function openModalWindow(e) {
         const filmCard = e.target;
+
+        // Get video ID from data card
         const id = filmCard.closest("div").getAttribute("data-id");
-        
+
+        // Return if no id
         if (!id) {
                 return;
         }
 
+        // Clear image for first
+        refs.posterImage.setAttribute("src", blankImage);
+
+        // Post req by id
         const filmInfo = await getMovieById(id);
         
         // // // в дата - объект с инфой, что пришел с Api============
@@ -46,70 +63,91 @@ async function openModalWindow(e) {
         //                 console.log(keyforYouTube);       
         //         }          
         // });
-        
-        
-        console.log(filmInfo);
-        const genreList = loadFromStorage("genres");
-        refs.modalWindow.classList.toggle("is-hidden");
-        const title = filmInfo.title;
-        const originalTitle = filmInfo.original_title;
-        const overview = filmInfo.overview;
-        const popularity = filmInfo.popularity.toFixed(2);
-        const vote = filmInfo.vote_average.toFixed(1);
-        const voteCount = filmInfo.vote_count;
-        const filmPosterValue = filmInfo.backdrop_path;
-        const filmPoster = `https://image.tmdb.org/t/p/w500${filmPosterValue}`;
-        console.log(filmPoster);
-        console.log(filmPosterValue);
 
-        let modalRender = refs.modal.insertAdjacentHTML(
-                "afterbegin",
-                `<button class="close_btn">
-       <svg width="32" height="32"><use href="./images/icons.svg#icon-close"></use></svg>
-   </button>
-   <div class="modal_poster"><img src="${filmPoster}" alt=""/>
-   </div>
-   <div class="modal_info">
-       <h2 class="modal_title">${title}</h2>
-       <table>
-           <tr>
-               <td class="vote">Vote/Votes</td>
-               <td class="votes-value">${vote}/${voteCount}</td>
-           </tr>
-           <tr>
-               <td class="popularity">Popularity</td>
-               <td class="popularity-value">${popularity}</td>
-           </tr>
-           <tr>
-               <td class="original-title">Original title</td>
-               <td class="original-title-value">${originalTitle}</td>
-           </tr>
-       </table>
+        // Show modal
+        refs.modalDetailOverlay.classList.toggle("is-hidden");
 
-       <p class="modal_txt">About</p>
-       <p class="modal_article">${overview}</p>
-       <ul class="modal_list_btn list">
-           <li>
-               <button type="button" class="modal_list_button btn_primary">Add to Watched</button>
-           </li>
-           <li>
-               <button type="button" class="modal_list_button btn_secondary">Add to Queue</button>
-           </li>
-           <li>
-               <button type="button" class="modal_list_button btn_watch-trailer">Watch movie trailer</button>
-           </li>
-       </ul>
-   </div>`,
-        );
-        //        const genres = getGenresByID({genreList}, ids);
-        //        console.log(ids);
-        //        console.log(genres);
+        // Export data
+        const {
+                title = "NO TITLE",
+                original_title = "No original title",
+                overview = "No overview...",
+                popularity,
+                vote_average,
+                vote_count,
+                poster_path,
+                genres,
+        } = filmInfo;
+
+        // Parse names of genres
+        const genresStr = genres.length > 0 ? parseGenres(genres) : "No genres";
+
+        // Title
+        refs.title.innerText = title;
+        // Poster image
+        poster_path
+                ? refs.posterImage.setAttribute(
+                          "src",
+                          `https://image.tmdb.org/t/p/w500${poster_path}`,
+                  )
+                : refs.posterImage.setAttribute("src", blankImage);
+
+        // Original title
+        refs.orgTitle.innerText = original_title || "NO TITLE";
+        // Popularity
+        refs.popularity.innerText = popularity ? popularity.toFixed(2) : "No info";
+        // Genres
+        refs.genres.innerText = genresStr || "No info";
+        // Overview
+        refs.article.innerText = overview || "No info";
+        // Votes
+        refs.votesCount.innerText = vote_count || "0";
+        // Avg votes
+        refs.votesAVG.innerText = vote_average ? vote_average.toFixed(1) : "0";
+
+        const watched = refs.watchedBtn.getAttribute("data-status");
+        const queue = refs.queueBtn.getAttribute("data-status");
+
+        // Check statuses
+        checkStatuses(watched, queue);
+
+        refs.watchedBtn.addEventListener("click", handleWatched);
+        refs.queueBtn.addEventListener("click", handleQueue);
 }
 
+function handleWatched() {
+        // Читаємо локалстор
+        // Шукаємо айді
+        // якщо є - видаляємо з стору, прибираємо клас з кнопки, прибираємо датаатр.
+}
+
+function handleQueue() {}
+
+// Checking statuses
+function checkStatuses(watched, queue) {
+        if (watched == "watched") {
+                refs.watchedBtn.classList.add("watched");
+                refs.watchedBtn.innerText = "Remove from Watched";
+        } else {
+                refs.watchedBtn.classList.remove("watched");
+                refs.watchedBtn.innerText = "Add to Watched";
+        }
+
+        if (queue == "in-queue") {
+                refs.queueBtn.classList.add("in-queue");
+                refs.queueBtn.innerText = "Remove from Queue";
+        } else {
+                refs.queueBtn.classList.remove("in-queue");
+                refs.queueBtn.innerText = "Add to Queue";
+        }
+}
+
+// Close modal
 function closeModal() {
-        refs.modalWindow.classList.toggle("is-hidden");
+        refs.modalDetailOverlay.classList.toggle("is-hidden");
 }
 
+// Fetch movie by ID
 async function getMovieById(id) {
         try {
                 // spinner
