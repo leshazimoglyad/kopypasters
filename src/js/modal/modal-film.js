@@ -1,10 +1,15 @@
 import { loadingSpinnerToggle } from "../interface/spinner";
 import { getGenresByID } from "../movies/movieCard";
-import { fetchMovieById } from "../services/fetch";
+import { fetchMovieById, fetchTrailerMovieById } from "../services/fetch";
 import { loadFromStorage } from "../services/storage";
+
+// импорт
+
+
 
 const refs = {
         modalWindow: document.querySelector(".backdrop"),
+        // openTrailerMovieBtn: document.querySelector(".btn_watch-trailer"),
         closeBtn: document.querySelector(".close_btn"),
         openBtn: document.querySelector(".movies-section__grid"),
         modalTitle: document.querySelector(".modal_title"),
@@ -13,6 +18,7 @@ const refs = {
         originalTitleValue: document.querySelector(".original-title-value"),
         modal: document.querySelector(".modal"),
 };
+
 
 export default function initModalFilmDetails() {
         refs.openBtn.addEventListener("click", openModalWindow);
@@ -28,6 +34,20 @@ async function openModalWindow(e) {
         }
 
         const filmInfo = await getMovieById(id);
+        
+        // // // в дата - объект с инфой, что пришел с Api============
+        // const data = await fetchTrailerMovieById(id);
+        // //  info - массив с объектами (в каждом объект есть 1 видео)
+        // const info = data.data.results;
+        // info.forEach(element => {
+        //         if (element.name === 'Official Trailer') {
+        //                 // ключ для видео в Ютубе
+        //                 const keyforYouTube = element.key      
+        //                 console.log(keyforYouTube);       
+        //         }          
+        // });
+        
+        
         console.log(filmInfo);
         const genreList = loadFromStorage("genres");
         refs.modalWindow.classList.toggle("is-hidden");
