@@ -1,12 +1,16 @@
 import { createMovieCard } from "../movies/movieCard";
 import { attachOnloadToCards } from "../movies/moviesList";
+import PaginationLibrary from "../paginationLibrary/paginationLibrary";
 import { loadFromStorage } from "../services/storage";
+
+const instPagination = new PaginationLibrary(9);
+instPagination.paginationContainer = "paginationLibrary";
 
 export function initLibrary() {
         showWatchedFilms();
         // eventListeners
-        refs.watchedBtn.addEventListener("click", showWatchedFilms);
-        refs.queueBtn.addEventListener("click", showQueuedFilms);
+        refs.watchedBtn.addEventListener("click", handleShowWatchedFilms);
+        refs.queueBtn.addEventListener("click", handleShowQueuedFilms);
 }
 
 const refs = {
@@ -17,13 +21,30 @@ const refs = {
 
 const genreList = loadFromStorage("genres");
 
+function calculatePerPageBasedOnInnerWidth() {
+        if (window.innerWidth > 0 && window.innerWidth < 768) {
+                return (perPage = 4);
+        }
+        if (window.innerWidth >= 768 && window.innerWidth < 1200) {
+                return (perPage = 8);
+        }
+        if (window.innerWidth >= 1200) {
+                return (perPage = 9);
+        }
+}
+
 // const queuedFilms = [];
 
 // localStorage.setItem("watchedFilms", JSON.stringify(watchedFilms));
 // localStorage.setItem("queuedFilms", JSON.stringify(queuedFilms));
 
+function handleShowWatchedFilms() {
+        instPagination.current = 1;
+        showWatchedFilms();
+}
+
 // WATCHED
-function showWatchedFilms() {
+export function showWatchedFilms() {
         refs.queueBtn.classList.remove("library-btn--active");
         refs.watchedBtn.classList.add("library-btn--active");
         clearGallery();
@@ -32,6 +53,8 @@ function showWatchedFilms() {
                 displayMessage();
                 return;
         }
+        const perPage = calculatePerPageBasedOnInnerWidth();
+        instPagination.initPagination(watchedFilms.length, perPage, showWatchedFilms);
         const markup = renderWatchedFilms(watchedFilms);
         refs.gallery.insertAdjacentHTML("beforeend", markup);
 
@@ -54,48 +77,30 @@ export function getWatchedFromLocalStorage() {
 }
 
 function renderWatchedFilms(watchedFilms) {
-        let perPage = 0;
-        let currentPage = 2;
-        if (window.innerWidth > 0 && window.innerWidth < 768) {
-                perPage = 4;
-                console.log("mobile");
-        } else if (window.innerWidth >= 768 && window.innerWidth < 1200) {
-                perPage = 8;
-                console.log("tablet");
-        } else if (window.innerWidth >= 1200) {
-                perPage = 9;
-                console.log("desktop");
-                // initPagination();
-        }
-        const firstIndexOfArray = currentPage > 0 ? (currentPage - 1) * perPage : 0;
-        let lastIndexOfArray = 0;
-        if (currentPage > 0) {
-                if (currentPage * perPage - 1 < watchedFilms.length) {
-                        lastIndexOfArray = currentPage * perPage - 1;
-                } else {
-                        lastIndexOfArray = watchedFilms.length;
-                }
-        }
+        // console.log(firstIndexOfArray);
+        // console.log(lastIndexOfArray);
+        instPagination.calculateIndexesOfArray();
 
         let markup = "";
 
-        for (let i = firstIndexOfArray; i <= lastIndexOfArray; i += 1) {
+        for (
+                let i = instPagination.firstIndexOfArray;
+                i <= instPagination.lastIndexOfArray;
+                i += 1
+        ) {
                 markup = markup + createMovieCard(watchedFilms[i], genreList);
-                // debugger;
         }
 
         return markup;
-        // // comment
+}
 
-        // return watchedFilms
-        //         .map((film) => {
-        //                 return createMovieCard(film, genreList);
-        //         })
-        //         .join("");
+function handleShowQueuedFilms() {
+        instPagination.current = 1;
+        showQueuedFilms();
 }
 
 // QUEUED
-function showQueuedFilms() {
+export function showQueuedFilms() {
         refs.queueBtn.classList.add("library-btn--active");
         refs.watchedBtn.classList.remove("library-btn--active");
         clearGallery();
@@ -104,6 +109,8 @@ function showQueuedFilms() {
                 displayMessage();
                 return;
         }
+        const perPage = calculatePerPageBasedOnInnerWidth();
+        instPagination.initPagination(queuedFilms.length, perPage, showQueuedFilms);
         const markup = renderQueuedFilms(queuedFilms);
         refs.gallery.insertAdjacentHTML("beforeend", markup);
 }
@@ -120,11 +127,20 @@ export function getQueuedFromLocalStorage() {
 }
 
 function renderQueuedFilms(queuedFilms) {
-        console.log(queuedFilms);
-        return queuedFilms.map((film) => {
-                createMovieCard(film);
-                console.log(film);
-        });
+        instPagination.calculateIndexesOfArray();
+
+        let markup = "";
+
+        for (
+                let i = instPagination.firstIndexOfArray;
+                i <= instPagination.lastIndexOfArray;
+                i += 1
+        ) {
+                markup = markup + createMovieCard(queuedFilms[i], genreList);
+                // debugger;
+        }
+
+        return markup;
 }
 
 //to display message when there are no films in WATCHED/ QUEUE:
