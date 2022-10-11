@@ -21,91 +21,6 @@ const genreList = loadFromStorage("genres");
 const watchedFilms = [
         {
                 adult: false,
-                backdrop_path: "/pfAZP7JvTTxqgq7n6A1OYgkAdEW.jpg",
-                id: 894205,
-                title: "Werewolf by Night",
-                original_language: "en",
-                original_title: "Werewolf by Night",
-                overview: "On a dark and somber night, a secret cabal of monster hunters emerge from the shadows and gather at the foreboding Bloodstone Temple following the death of their leader. In a strange and macabre memorial to the leader’s life, the attendees are thrust into a mysterious and deadly competition for a powerful relic—a hunt that will ultimately bring them face to face with a dangerous monster.",
-                poster_path: "/mvIvNKRIJPPS7WSFarFhOAGIVnU.jpg",
-                media_type: "movie",
-                genre_ids: [28, 14, 27, 9648],
-                popularity: 260.568,
-                release_date: "2022-09-25",
-                video: false,
-                vote_average: 7.5,
-                vote_count: 266,
-        },
-        {
-                adult: false,
-                backdrop_path: "/qtfMr08KQsWXnCHY0a96N8NpQ2l.jpg",
-                id: 30984,
-                name: "Bleach",
-                original_language: "ja",
-                original_name: "ブリーチ",
-                overview: "For as long as he can remember, Ichigo Kurosaki has been able to see ghosts. But when he meets Rukia, a Soul Reaper who battles evil spirits known as Hollows, he finds his life is changed forever. Now, with a newfound wealth of spiritual energy, Ichigo discovers his true calling: to protect the living and the dead from evil.",
-                poster_path: "/2EewmxXe72ogD0EaWM8gqa0ccIw.jpg",
-                media_type: "tv",
-                genre_ids: [10759, 16, 10765],
-                popularity: 431.983,
-                first_air_date: "2004-10-05",
-                vote_average: 8.337,
-                vote_count: 1252,
-                origin_country: ["JP"],
-        },
-        {
-                adult: false,
-                backdrop_path: "/zgMjGYxVKwUKvl5UdT9jNkiNyCe.jpg",
-                id: 1024530,
-                title: "Grimcutty",
-                original_language: "en",
-                original_title: "Grimcutty",
-                overview: "A suburban teen girl and her little brother must stop a terrifying internet meme brought to life by the hysteria of their parents.",
-                poster_path: "/qvg75YJMfbHeDNirUrrgBMQImRn.jpg",
-                media_type: "movie",
-                genre_ids: [27],
-                popularity: 55.751,
-                release_date: "2022-10-10",
-                video: false,
-                vote_average: 5.364,
-                vote_count: 12,
-        },
-        {
-                adult: false,
-                backdrop_path: "/etj8E2o0Bud0HkONVQPjyCkIvpv.jpg",
-                id: 94997,
-                name: "House of the Dragon",
-                original_language: "en",
-                original_name: "House of the Dragon",
-                overview: "The Targaryen dynasty is at the absolute apex of its power, with more than 15 dragons under their yoke. Most empires crumble from such heights. In the case of the Targaryens, their slow fall begins when King Viserys breaks with a century of tradition by naming his daughter Rhaenyra heir to the Iron Throne. But when Viserys later fathers a son, the court is shocked when Rhaenyra retains her status as his heir, and seeds of division sow friction across the realm.",
-                poster_path: "/z2yahl2uefxDCl0nogcRBstwruJ.jpg",
-                media_type: "tv",
-                genre_ids: [10765, 18, 10759],
-                popularity: 7112.995,
-                first_air_date: "2022-08-21",
-                vote_average: 8.557,
-                vote_count: 1689,
-                origin_country: ["US"],
-        },
-        {
-                adult: false,
-                backdrop_path: "/iHc14vucwUMl6WuvQa4iPfoEdy9.jpg",
-                id: 799546,
-                title: "Luckiest Girl Alive",
-                original_language: "en",
-                original_title: "Luckiest Girl Alive",
-                overview: "A successful woman in New York City finds her life upended when she is forced to confront a dark truth that threatens to unravel her meticulously crafted life.",
-                poster_path: "/e0vrbTmTf2ZcW5CIS9qJ8FDbsU9.jpg",
-                media_type: "movie",
-                genre_ids: [80, 18],
-                popularity: 85.844,
-                release_date: "2022-09-30",
-                video: false,
-                vote_average: 6.564,
-                vote_count: 109,
-        },
-        {
-                adult: false,
                 backdrop_path: "/3r3tZgKTw1554hcFoUfydLHE38w.jpg",
                 id: 338947,
                 title: "Hellraiser",
@@ -142,7 +57,7 @@ const watchedFilms = [
                 adult: false,
                 backdrop_path: "/jGcACEQ684x0C6jRlBrkEJyVm9m.jpg",
                 id: 126254,
-                name: "The Midnight Club",
+                title: "The Midnight Club",
                 original_language: "en",
                 original_name: "The Midnight Club",
                 overview: "At a manor with a mysterious history, the 8 members of the Midnight Club meet each night at midnight to tell sinister stories – and to look for signs of the supernatural from the beyond.",
@@ -159,7 +74,7 @@ const watchedFilms = [
                 adult: false,
                 backdrop_path: "/1rO4xoCo4Z5WubK0OwdVll3DPYo.jpg",
                 id: 84773,
-                name: "The Lord of the Rings: The Rings of Power",
+                title: "The Lord of the Rings: The Rings of Power",
                 original_language: "en",
                 original_name: "The Lord of the Rings: The Rings of Power",
                 overview: "Beginning in a time of relative peace, we follow an ensemble cast of characters as they confront the re-emergence of evil to Middle-earth. From the darkest depths of the Misty Mountains, to the majestic forests of Lindon, to the breathtaking island kingdom of Númenor, to the furthest reaches of the map, these kingdoms and characters will carve out legacies that live on long after they are gone.",
@@ -244,7 +159,7 @@ const watchedFilms = [
                 adult: false,
                 backdrop_path: "/3O5voBAoeQ9kipZCKmx6uDfiRLc.jpg",
                 id: 136699,
-                name: "Glitch",
+                title: "Glitch",
                 original_language: "ko",
                 original_name: "글리치",
                 overview: "A young woman joins forces with a UFO enthusiast to investigate her boyfriend’s sudden disappearance and stumbles into a wild conspiracy.",
@@ -313,44 +228,44 @@ function getWatchedFromLocalStorage() {
 }
 
 function renderWatchedFilms(watchedFilms) {
-        // let perPage = 0;
-        // let currentPage = 2;
-        // if (window.innerWidth > 0 && window.innerWidth < 768) {
-        //         perPage = 4;
-        //         console.log("mobile");
-        // } else if (window.innerWidth >= 768 && window.innerWidth < 1200) {
-        //         perPage = 8;
-        //         console.log("tablet");
-        // } else if (window.innerWidth >= 1200) {
-        //         perPage = 9;
-        //         console.log("desktop");
-        //         // initPagination();
-        // }
-        // const firstIndexOfArray = currentPage > 0 ? (currentPage - 1) * perPage : 0;
-        // let lastIndexOfArray = 0;
-        // if (currentPage > 0) {
-        //         if (currentPage * perPage - 1 < watchedFilms.length) {
-        //                 lastIndexOfArray = currentPage * perPage - 1;
-        //         } else {
-        //                 lastIndexOfArray = watchedFilms.length;
-        //         }
-        // }
+        let perPage = 0;
+        let currentPage = 2;
+        if (window.innerWidth > 0 && window.innerWidth < 768) {
+                perPage = 4;
+                console.log("mobile");
+        } else if (window.innerWidth >= 768 && window.innerWidth < 1200) {
+                perPage = 8;
+                console.log("tablet");
+        } else if (window.innerWidth >= 1200) {
+                perPage = 9;
+                console.log("desktop");
+                // initPagination();
+        }
+        const firstIndexOfArray = currentPage > 0 ? (currentPage - 1) * perPage : 0;
+        let lastIndexOfArray = 0;
+        if (currentPage > 0) {
+                if (currentPage * perPage - 1 < watchedFilms.length) {
+                        lastIndexOfArray = currentPage * perPage - 1;
+                } else {
+                        lastIndexOfArray = watchedFilms.length;
+                }
+        }
 
-        // let markup = "";
+        let markup = "";
 
-        // for (let i = firstIndexOfArray; i <= lastIndexOfArray; i += 1) {
-        //         markup = markup + createMovieCard(watchedFilms[i], genreList);
-        //         // debugger;
-        // }
+        for (let i = firstIndexOfArray; i <= lastIndexOfArray; i += 1) {
+                markup = markup + createMovieCard(watchedFilms[i], genreList);
+                // debugger;
+        }
 
-        // return markup;
-        // comment
+        return markup;
+        // // comment
 
-        return watchedFilms
-                .map((film) => {
-                        return createMovieCard(film, genreList);
-                })
-                .join("");
+        // return watchedFilms
+        //         .map((film) => {
+        //                 return createMovieCard(film, genreList);
+        //         })
+        //         .join("");
 }
 
 // QUEUED
